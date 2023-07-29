@@ -1,0 +1,27 @@
+<html>
+
+<body>
+<div>
+    <form method="post">
+        <input type="text" name="pizzaName" placeholder="Enter the name of the pizza">
+        <input type="text" name="size" placeholder="Enter size of the pizza">
+        <input type="text" name="description" placeholder="enter description of the pizza">
+        <button type="submit">Add</button>
+    </form>
+</div>
+<div>List of pizza</div>
+<form method="post" action="filter">
+    <input type="text" name="filter">
+    <button type="submit">Find pizza</button>
+</form>
+{{#pizzas}}
+    <div>
+        <b>{{id}}</b>
+        <span>{{pizzaName}}</span>
+        <span>{{size}}</span>
+
+    </div>
+
+{{/pizzas}}
+</body>
+</html>
