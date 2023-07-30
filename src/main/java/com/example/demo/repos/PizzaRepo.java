@@ -6,5 +6,5 @@ import org.springframework.data.repository.CrudRepository;
 import java.util.List;
 
 public interface PizzaRepo extends CrudRepository<Pizza, Long> {
-    List<Pizza> findPizzaByPizzaName(String pizzaName);
+    List<Pizza> findByPizzaName(String pizzaName);
 }

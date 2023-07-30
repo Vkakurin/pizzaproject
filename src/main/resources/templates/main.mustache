@@ -1,25 +1,37 @@
 <html>
 
 <body>
+<form action="/logout" method="post">
+    <input type="hidden" name="_csrf" value="{{_csrf.token}}" />
+    <input type="submit" value="Sign Out"/>
+</form>
+
 <div>
     <form method="post">
         <input type="text" name="pizzaName" placeholder="Enter the name of the pizza">
         <input type="text" name="size" placeholder="Enter size of the pizza">
-        <input type="text" name="description" placeholder="enter description of the pizza">
-        <button type="submit">Add</button>
+        <input type="text" name="description" placeholder="Enter description of the pizza">
+        <input type="hidden" name="_csrf" value="{{_csrf.token}}" />
+        <button type="submit">Add Pizza</button>
     </form>
 </div>
 <div>List of pizza</div>
-<form method="post" action="filter">
-    <input type="text" name="filter">
-    <button type="submit">Find pizza</button>
+<form method="post" action="filter" >
+    <input type="text" name="filter" placeholder="Enter the name of the pizza">
+    <input type="hidden" name="_csrf" value="{{_csrf.token}}" />
+    <button type="submit">Find pizza by name</button>
+</form>
+<form method="post" action="delete">
+    <input type="text" name="id" placeholder="Enter Id " >
+    <input type="hidden" name="_csrf" value="{{_csrf.token}}" />
+    <button type="submit">Delete pizza by Id</button>
 </form>
 {{#pizzas}}
     <div>
         <b>{{id}}</b>
         <span>{{pizzaName}}</span>
         <span>{{size}}</span>
-
+        <span>{{description}}</span>
     </div>
 
 {{/pizzas}}

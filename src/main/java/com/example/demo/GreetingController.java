@@ -2,13 +2,10 @@ package com.example.demo;
 
 import com.example.demo.domain.Pizza;
 import com.example.demo.repos.PizzaRepo;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 
-import java.util.List;
+
 import java.util.Map;
 
 @Controller
@@ -21,23 +18,19 @@ public class GreetingController {
     }
 
 
-    @GetMapping("/greeting")
-    public String greeting(
-            @RequestParam(name = "name", required = false, defaultValue = "World") String name,
-            Map<String, Object> model
-    ) {
-        model.put("name", name);
+    @GetMapping("")
+    public String greeting(Map<String, Object> model) {
         return "greeting";
     }
 
-    @GetMapping
+    @GetMapping("/main")
     public String main(Map<String, Object> model) {
         Iterable<Pizza> pizzas = pizzaRepo.findAll();
-        model.put("pizzaName", pizzas);
+        model.put("pizzas", pizzas);
         return "main";
     }
 
-    @PostMapping
+    @PostMapping("/main")
     public String add(
             @RequestParam String pizzaName,
             @RequestParam String size,
@@ -46,17 +39,36 @@ public class GreetingController {
         Pizza pizza = new Pizza(pizzaName, size, description);
         pizzaRepo.save(pizza);
         Iterable<Pizza> pizzas = pizzaRepo.findAll();
-        model.put("pizzaName", pizzas);
+        model.put("pizzas", pizzas);
         return "main";
     }
+
     @PostMapping("filter")
     public String filter(
             @RequestParam String filter,
             Map<String, Object> model
-    ){
-        List<Pizza> pizzas = pizzaRepo.findPizzaByPizzaName(filter);
+    ) {
+        Iterable<Pizza> pizzas;
+        if (filter != null) {
+            pizzas = pizzaRepo.findByPizzaName(filter);
+        } else {
+            pizzas = pizzaRepo.findAll();
+        }
         model.put("pizzas", pizzas);
-   return "main";
+        return "main";
     }
+
+    //todo
+
+    @DeleteMapping("delete/{id}")
+    public String deletePizza(
+            Map<String, Object> model,
+            @PathVariable Long id){
+
+        pizzaRepo.deleteById(id);
+        model.put("pizzas",deletePizza(model, id));
+        return "main";
+    }
+
 
 }
