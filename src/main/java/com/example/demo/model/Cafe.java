@@ -1,17 +1,14 @@
-package com.example.demo.domain;
+package com.example.demo.model;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 @Entity
 @Data
-@AllArgsConstructor
-@NoArgsConstructor
+
 public class Cafe {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -20,4 +17,13 @@ public class Cafe {
     private String address;
     private String phone;
 
+    public Cafe(String nameCafe, String address, String phone) {
+        this.nameCafe = nameCafe;
+        this.address = address;
+        this.phone = phone;
+    }
+
+    public Cafe() {
+
+    }
 }

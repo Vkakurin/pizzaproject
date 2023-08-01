@@ -1,6 +1,6 @@
 package com.example.demo.repos;
 
-import com.example.demo.domain.Pizza;
+import com.example.demo.model.Pizza;
 import org.springframework.data.repository.CrudRepository;
 
 import java.util.List;

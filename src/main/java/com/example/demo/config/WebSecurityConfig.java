@@ -1,5 +1,6 @@
 package com.example.demo.config;
 
+
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
@@ -17,11 +18,9 @@ public class WebSecurityConfig {
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http
-                .authorizeHttpRequests((requests) -> {
-                            requests
-                                    .requestMatchers("/").permitAll()
-                                    .anyRequest().authenticated();
-                        }
+                .authorizeHttpRequests((requests) -> requests
+                        .requestMatchers("/","/registration","/main").permitAll()
+                        .anyRequest().authenticated()
                 )
                 .formLogin((form) -> form
                         .loginPage("/login")
@@ -36,7 +35,7 @@ public class WebSecurityConfig {
     public UserDetailsService userDetailsService() {
         UserDetails user =
                 User.withDefaultPasswordEncoder()
-                        .username("u")
+                        .username("user")
                         .password("p")
                         .roles("USER")
                         .build();

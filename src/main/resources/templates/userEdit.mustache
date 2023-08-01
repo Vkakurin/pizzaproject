@@ -1,0 +1,12 @@
+<!DOCTYPE html>
+TODO
+<body>
+<form method="post" action="/user" >
+    <input type="text" name="username" value="{{user.username}}">
+
+    <input type="text" name="userId" value="{{user.id}}" />
+    <input type="text" name="_csrf" value="{{_csrf.token}}" />
+    <button type="submit">Save</button>
+</form>
+</body>
+</html>
