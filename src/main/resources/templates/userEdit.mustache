@@ -1,12 +1,26 @@
 <!DOCTYPE html>
-TODO
 <body>
-<form method="post" action="/user" >
-    <input type="text" name="username" value="{{user.username}}">
+<a href="/main">Go to Main page</a>
 
-    <input type="text" name="userId" value="{{user.id}}" />
-    <input type="text" name="_csrf" value="{{_csrf.token}}" />
-    <button type="submit">Save</button>
+<h4>Edit of Users</h4>
+
+<form method="post" action="/user"  >
+<input type="text" name="username" value="{{user.username}}">
+
+<input type="text" name="userId" value="{{user.id}}"/>
+<input type="text" name="_csrf" value="{{_csrf.token}}"/>
+<button type="submit">Save</button>
 </form>
+<h4>List of Users</h4>
+{{#users}}
+    <div>
+        <b>{{id}}</b>
+        <span>{{username}}</span>
+        <span>{{password}}</span>
+        <span>{{active}}</span>
+    </div>
+
+{{/users}}
+
 </body>
 </html>

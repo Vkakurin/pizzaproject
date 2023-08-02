@@ -8,6 +8,8 @@ import lombok.*;
 
 @Entity
 @Data
+@Getter
+@Setter
 
 public class Cafe {
     @Id

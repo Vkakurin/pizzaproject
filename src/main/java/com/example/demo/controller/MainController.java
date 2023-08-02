@@ -5,8 +5,9 @@ import com.example.demo.repos.PizzaRepo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.*;
-
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.Map;
 
@@ -34,32 +35,20 @@ public class MainController {
         model.put("filter", filter);
         return "main";
     }
-
-    @PostMapping("/main")
-    public String add(
-            @RequestParam String pizzaName,
-            @RequestParam String size,
-            @RequestParam String description,
-            Map<String, Object> model) {
-        Pizza pizza = new Pizza(pizzaName, size, description);
-        pizzaRepo.save(pizza);
-        Iterable<Pizza> pizzas = pizzaRepo.findAll();
-        model.put("pizzas", pizzas);
-        return "main";
-    }
-
-
-    //todo
 //
-//   @GetMapping("/deletePizza/{id}")
-//    public String deletePizza(
-//            Model model,
-//            @PathVariable Long id){
-//
-//        pizzaRepo.deleteById(id);
-//        model.addAttribute("pizzas", pizzaRepo.findAll());
+//    @PostMapping("/main")
+//    public String add(
+//            @RequestParam String pizzaName,
+//            @RequestParam String size,
+//            @RequestParam String description,
+//            Map<String, Object> model) {
+//        Pizza pizza = new Pizza(pizzaName, size, description);
+//        pizzaRepo.save(pizza);
+//        Iterable<Pizza> pizzas = pizzaRepo.findAll();
+//        model.put("pizzas", pizzas);
 //        return "main";
 //    }
+
 
 
 }

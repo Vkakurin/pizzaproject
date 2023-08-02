@@ -1,0 +1,38 @@
+<html>
+
+<body>
+<a href="/main">Go to Main page</a>
+<h4>CAFE</h4>
+
+<div>
+    <form method="post"  >
+        <input type="text" name="nameCafe" placeholder="Enter the name of the cafe">
+        <input type="text" name="address" placeholder="Enter address the cafe">
+        <input type="text" name="phone" placeholder="Enter phone">
+        <input type="hidden" name="_csrf" value="{{_csrf.token}}" />
+        <button type="submit">Add Cafe</button>
+    </form>
+</div>
+
+<form method="get"  action="/cafe">
+    <input type="text" name="filter" value="{{filter}}" placeholder="nameCafe "/>
+    <button type="submit">Find cafe by name</button>
+</form>
+
+<form method="get" action="/deleteCafe">
+    <input type="text" name="cafeId" placeholder="Enter Id " >
+    <button type="submit">Delete cafe by Id</button>
+</form>
+<div>List of cafe</div>
+{{#cafes}}
+    <div>
+        <b>{{cafeId}}</b>
+        <span>{{nameCafe}}</span>
+        <span>{{address}}</span>
+        <span>{{phone}}</span>
+    </div>
+
+{{/cafes}}
+
+</body>
+</html>

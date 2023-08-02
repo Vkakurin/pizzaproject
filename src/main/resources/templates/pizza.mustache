@@ -1,0 +1,37 @@
+<html>
+
+<body>
+<a href="/main">Go to Main page</a>
+<h4>PIZZA</h4>
+
+<div>
+    <form method="post"  >
+        <input type="text" name="pizzaName" placeholder="Enter the name of the pizza">
+        <input type="text" name="size" placeholder="Enter size of the pizza">
+        <input type="text" name="description" placeholder="Enter description of the pizza">
+        <input type="hidden" name="_csrf" value="{{_csrf.token}}" />
+        <button type="submit">Add Pizza</button>
+    </form>
+</div>
+
+<form method="get"  action="/pizza">
+    <input type="text" name="filter" value="{{filter}}" placeholder="pizzaName"/>
+    <button type="submit">Find pizza by name</button>
+</form>
+
+<form method="get" action="/deletePizza">
+    <input type="text" name="id" placeholder="Enter Id " >
+    <button type="submit">Delete pizza by Id</button>
+</form>
+<div>List of pizza</div>
+{{#pizzas}}
+    <div>
+        <b>{{id}}</b>
+        <span>{{pizzaName}}</span>
+        <span>{{size}}</span>
+        <span>{{description}}</span>
+    </div>
+
+{{/pizzas}}
+</body>
+</html>
