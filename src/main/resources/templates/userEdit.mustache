@@ -4,17 +4,17 @@
 
 <h4>Edit of Users</h4>
 
-<form method="post" action="/user"  >
+<form method="post"  >
 <input type="text" name="username" value="{{user.username}}">
 
 <input type="text" name="userId" value="{{user.id}}"/>
-<input type="text" name="_csrf" value="{{_csrf.token}}"/>
+
 <button type="submit">Save</button>
 </form>
 <h4>List of Users</h4>
 {{#users}}
     <div>
-        <b>{{id}}</b>
+        <b>{{user_id}}</b>
         <span>{{username}}</span>
         <span>{{password}}</span>
         <span>{{active}}</span>

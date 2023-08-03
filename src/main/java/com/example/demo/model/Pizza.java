@@ -1,14 +1,17 @@
 package com.example.demo.model;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+
 import lombok.*;
 
-@Entity
-@Data
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
 
+
+@Entity
+@Getter
+@Setter
 public class Pizza {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)

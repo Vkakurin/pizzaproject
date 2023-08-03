@@ -40,7 +40,7 @@ public class PizzaController {
         pizzaRepo.save(pizza);
         Iterable<Pizza> pizzas = pizzaRepo.findAll();
         model.put("pizzas", pizzas);
-        return "pizza";
+        return "redirect:/pizza";
     }
 
 

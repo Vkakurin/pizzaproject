@@ -35,20 +35,5 @@ public class MainController {
         model.put("filter", filter);
         return "main";
     }
-//
-//    @PostMapping("/main")
-//    public String add(
-//            @RequestParam String pizzaName,
-//            @RequestParam String size,
-//            @RequestParam String description,
-//            Map<String, Object> model) {
-//        Pizza pizza = new Pizza(pizzaName, size, description);
-//        pizzaRepo.save(pizza);
-//        Iterable<Pizza> pizzas = pizzaRepo.findAll();
-//        model.put("pizzas", pizzas);
-//        return "main";
-//    }
-
-
 
 }
