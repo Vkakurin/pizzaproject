@@ -16,15 +16,17 @@ public class Pizza {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
+
     private String pizzaName;
     private String size;
     private String description;
+    private Double price;
 
-    public Pizza(String pizzaName, String size, String description) {
-
+    public Pizza(String pizzaName, String size, String description, Double price) {
         this.pizzaName = pizzaName;
         this.size = size;
         this.description = description;
+        this.price = price;
     }
 
     public Pizza() {

@@ -12,7 +12,7 @@ import javax.persistence.Id;
 @Entity
 @Setter
 @Getter
-
+@Data
 
 public class Cafe {
     @Id

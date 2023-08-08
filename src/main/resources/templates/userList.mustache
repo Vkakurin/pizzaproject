@@ -1,17 +1,16 @@
 <!DOCTYPE html>
 <body>
 <a href="/main">Go to Main page</a>
+
 <h4>List of Users</h4>
-    {{#users}}
-        <div>
-            <b>{{id}}</b>
-            <span>{{username}}</span>
-            <span>{{password}}</span>
-            <span>{{active}}</span>
-        </div>
+{{#users}}
+    <div>
+        <b>{{user_id}}</b>
+        <span>{{username}}</span>
+        <span>{{password}}</span>
+        <span>{{active}}</span>
+    </div>
 
-    {{/users}}
-
-</form>
+{{/users}}
 </body>
 </html>

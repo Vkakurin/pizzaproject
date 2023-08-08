@@ -9,7 +9,7 @@
         <input type="text" name="pizzaName" placeholder="Enter the name of the pizza">
         <input type="text" name="size" placeholder="Enter size of the pizza">
         <input type="text" name="description" placeholder="Enter description of the pizza">
-
+        <input type="text" name="price" placeholder="Enter price the pizza">
         <button type="submit">Add Pizza</button>
     </form>
 </div>
@@ -19,10 +19,18 @@
     <button type="submit">Find pizza by name</button>
 </form>
 
-<form method="get" action="/deletePizza">
-    <input type="text" name="id" placeholder="Enter Id " >
+
+<form method="get" action="/getPizza" >
+    <input type="text" name="id"  placeholder="Enter Id" >
+    <button type="submit">Find pizza by Id</button>
+</form>
+
+<form method="get" action="/deletePizza" >
+    <input type="text" name="id"  placeholder="Enter Id" >
     <button type="submit">Delete pizza by Id</button>
 </form>
+
+
 <div>List of pizza</div>
 {{#pizzas}}
     <div>
@@ -30,6 +38,7 @@
         <span>{{pizzaName}}</span>
         <span>{{size}}</span>
         <span>{{description}}</span>
+        <span>{{price}}</span>
     </div>
 
 {{/pizzas}}

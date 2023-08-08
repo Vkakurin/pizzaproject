@@ -31,12 +31,12 @@ public class UserController {
         model.addAttribute("roles", Role.values());
         return "userEdit";
     }
-
+//todo
     @PostMapping()
     public String userSave(
             @RequestParam String username,
             @RequestParam Map<String, String> form,
-            @RequestParam("user_id") User user
+            @RequestParam("UserId") User user
     ){
         user.setUsername(username);
         Set<String> roles = Arrays.stream((Role.values()))
@@ -53,5 +53,13 @@ public class UserController {
         userRepo.save(user);
         return "redirect:/user";
     }
+    @GetMapping("/deleteUser/{id}")
+    public String deleteUser(
+            Model model,
+            @PathVariable Long id){
 
+        userRepo.deleteById(id);
+        model.addAttribute("user", userRepo.findAll());
+        return "redirect:/user";
+    }
 }
