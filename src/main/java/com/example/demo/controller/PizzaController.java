@@ -2,16 +2,12 @@ package com.example.demo.controller;
 
 import com.example.demo.model.Pizza;
 import com.example.demo.repos.PizzaRepo;
-import com.example.demo.service.CafeService;
 import com.example.demo.service.PizzaService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
-
-import java.util.Map;
-import java.util.Optional;
 
 @Controller
 public class PizzaController {
@@ -28,15 +24,15 @@ public class PizzaController {
     @GetMapping("/pizza")
     public String getPizzaByName(
             @RequestParam(required = false, defaultValue = "") String filter,
-            Map<String, Object> model) {
+            Model model) {
         Iterable<Pizza> pizzas;
         if (filter != null && !filter.isEmpty()) {
             pizzas = pizzaRepo.findByPizzaName(filter);
         } else {
             pizzas = pizzaRepo.findAll();
         }
-        model.put("pizzas", pizzas);
-        model.put("filter", filter);
+        model.addAttribute("pizzas", pizzas);
+        model.addAttribute("filter", filter);
         return "pizza";
     }
 
@@ -54,7 +50,6 @@ public class PizzaController {
         model.addAttribute("pizzas", pizzas);
         return "redirect:/pizza";
     }
-
 
     @GetMapping("/deletePizza/{id}")
     public String deletePizza(
@@ -75,17 +70,6 @@ public class PizzaController {
         model.addAttribute("id", id);
         return "redirect:/pizza";
     }
-
-
-//    @GetMapping("/deletePizza/{id}")
-//    public String deletePizzaById(
-//            Model model,
-//            @PathVariable Long id){
-//
-//        pizzaRepo.deleteById(id);
-//        model.addAttribute("pizza", pizzaRepo.findAll());
-//        return "redirect:/pizza";
-//    }
 
 
 }

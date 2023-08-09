@@ -1,0 +1,42 @@
+<html>
+
+<body>
+<a href="/main">Go to Main page</a>
+<h4>ORDER</h4>
+
+<div>
+    <form method="post"  >
+        <input type="text" name="nameCustomer" placeholder="Enter nameCustomer">
+        <input type="text" name="addressDelivery" placeholder="Enter address">
+        <input type="text" name="phoneCustomer" placeholder="Enter phone">
+
+
+
+        <button type="submit">Add Order</button>
+    </form>
+</div>
+
+<form method="get"  action="/pizzaOrder">
+    <input type="text" name="filter" value="{{filter}}" placeholder="nameCustomer "/>
+    <button type="submit">Find order by nameCustomer</button>
+</form>
+
+<form method="get" action="/deleteOrder">
+    <input type="text" name="orderId" placeholder="Enter Id " >
+    <button type="submit">Delete order by Id</button>
+</form>
+
+
+<div>List of orders</div>
+{{#pizzaOrders}}
+    <div>
+        <b>{{order_id}}</b>
+        <span>{{nameCustomer}}</span>
+        <span>{{addressDelivery}}</span>
+        <span>{{phoneCustomer}}</span>
+    </div>
+
+{{/pizzaOrders}}
+
+</body>
+</html>

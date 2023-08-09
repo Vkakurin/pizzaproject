@@ -23,6 +23,7 @@ public class User {
     private String username;
     private String password;
     private boolean active;//активен ли пользователь
+
     @ElementCollection(targetClass = Role.class,fetch =FetchType.EAGER )//данные из Енам
     @CollectionTable(name = "user_role",joinColumns = @JoinColumn(name = "user_id"))
     @Enumerated(EnumType.STRING)
