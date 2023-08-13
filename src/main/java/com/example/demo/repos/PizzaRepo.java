@@ -11,6 +11,6 @@ public interface PizzaRepo extends CrudRepository<Pizza, Long> {
     List<Pizza> findByPizzaName(String pizzaName);
 
 
-    Optional<Optional<Pizza>> findAllById(Long id);
+
 
 }

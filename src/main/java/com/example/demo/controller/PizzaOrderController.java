@@ -1,9 +1,12 @@
 package com.example.demo.controller;
 
+import com.example.demo.model.Cafe;
+import com.example.demo.model.Pizza;
 import com.example.demo.model.PizzaOrder;
 import com.example.demo.repos.PizzaOrderRepo;
 import com.example.demo.service.PizzaOrderService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -32,7 +35,7 @@ public class PizzaOrderController {
         if (filter != null && !filter.isEmpty()) {
             orders = orderRepo.findByNameCustomer(filter);
         } else {
-           orders = orderRepo.findAll();
+            orders = orderRepo.findAll();
         }
         model.addAttribute("pizzaOrders", orders);
         model.addAttribute("filter", filter);
@@ -42,11 +45,13 @@ public class PizzaOrderController {
 
     @PostMapping("/pizzaOrder")
     public String addOrder(
+            @AuthenticationPrincipal Cafe cafe,
             @RequestParam String nameCustomer,
             @RequestParam String addressDelivery,
             @RequestParam String phoneCustomer,
+            @AuthenticationPrincipal Pizza pizza,
             Model model) {
-        PizzaOrder pizzaOrder = new PizzaOrder(nameCustomer, addressDelivery, phoneCustomer);
+        PizzaOrder pizzaOrder = new PizzaOrder(nameCustomer, addressDelivery, phoneCustomer, pizza, cafe);
         orderRepo.save(pizzaOrder);
         Iterable<PizzaOrder> pizzaOrders = orderRepo.findAll();
         model.addAttribute("pizzaOrders", pizzaOrders);

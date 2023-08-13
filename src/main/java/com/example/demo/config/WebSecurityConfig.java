@@ -1,5 +1,6 @@
 package com.example.demo.config;
 
+import com.example.demo.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
@@ -13,9 +14,13 @@ import javax.sql.DataSource;
 
 @Configuration
 @EnableWebSecurity
+// todo добавить права Админа
+
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter { // Подключаем WebSecurityConfigurerAdapter. Используется до версии Spring Boot 3. Нужно указать такую же версию в pom.xml
     @Autowired
     private DataSource dataSource;//Объект за взаимодействие с БД
+    @Autowired
+    private UserService userService;
 
     //Override - переопределяем методы из WebSecurityConfigurerAdapter
     @Override
@@ -36,10 +41,21 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter { // Под�
 
     @Override
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
-        auth.jdbcAuthentication()//обект за авторизацию пользователя
-                .dataSource(dataSource)// обращение к БД
-                .passwordEncoder(NoOpPasswordEncoder.getInstance())
-                .usersByUsernameQuery("select username, password, active from usr where username=?")
-                .authoritiesByUsernameQuery("select u.username, ur.roles from usr u inner join user_role ur on u.user_id = ur.user_id where u.username=?");
+        auth.userDetailsService(userService)//обект за авторизацию пользователя
+                .passwordEncoder(NoOpPasswordEncoder.getInstance());
     }
+
 }
+
+
+//    @Override
+//    protected void configure(AuthenticationManagerBuilder auth) throws Exception {
+//        auth.jdbcAuthentication()//обект за авторизацию пользователя
+//                .dataSource(dataSource)// обращение к БД
+//                .passwordEncoder(NoOpPasswordEncoder.getInstance())
+//                .usersByUsernameQuery("select username, password, active from usr where username=?")
+//                .authoritiesByUsernameQuery("select u.username, ur.roles from usr u inner join user_role ur on u.user_id = ur.user_id where u.username=?");
+//    }
+
+
+

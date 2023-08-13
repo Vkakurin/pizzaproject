@@ -1,9 +1,12 @@
 package com.example.demo.controller;
 
+import com.example.demo.model.Cafe;
 import com.example.demo.model.Pizza;
+import com.example.demo.repos.CafeRepo;
 import com.example.demo.repos.PizzaRepo;
 import com.example.demo.service.PizzaService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -13,6 +16,8 @@ import org.springframework.web.bind.annotation.*;
 public class PizzaController {
     @Autowired
     private PizzaRepo pizzaRepo;
+    @Autowired
+    private CafeRepo cafeRepo;
     private final PizzaService pizzaService;
 
 
@@ -48,6 +53,7 @@ public class PizzaController {
         pizzaRepo.save(pizza);
         Iterable<Pizza> pizzas = pizzaRepo.findAll();
         model.addAttribute("pizzas", pizzas);
+
         return "redirect:/pizza";
     }
 
@@ -66,7 +72,7 @@ public class PizzaController {
             Model model,
             @PathVariable Long id
     ) {
-        model.addAttribute("pizza", pizzaService.findPizzaById(id));
+        model.addAttribute("pizza", pizzaRepo.findById(id));
         model.addAttribute("id", id);
         return "redirect:/pizza";
     }

@@ -9,16 +9,16 @@
         <input type="text" name="nameCustomer" placeholder="Enter nameCustomer">
         <input type="text" name="addressDelivery" placeholder="Enter address">
         <input type="text" name="phoneCustomer" placeholder="Enter phone">
+        <input type="text" name="cafeId" placeholder="Enter cafeId">
+        <input type="text" name="id" placeholder="Enter pizzaId">
 
-
-
-        <button type="submit">Add Order</button>
+        <button type="submit">Add Customer</button>
     </form>
 </div>
 
 <form method="get"  action="/pizzaOrder">
     <input type="text" name="filter" value="{{filter}}" placeholder="nameCustomer "/>
-    <button type="submit">Find order by nameCustomer</button>
+    <button type="submit">Find orders by nameCustomer</button>
 </form>
 
 <form method="get" action="/deleteOrder">
@@ -34,6 +34,7 @@
         <span>{{nameCustomer}}</span>
         <span>{{addressDelivery}}</span>
         <span>{{phoneCustomer}}</span>
+
     </div>
 
 {{/pizzaOrders}}

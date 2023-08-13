@@ -27,15 +27,15 @@ public class PizzaService {
         return StreamSupport.stream(pizzaRepo.findAll().spliterator(), false)
                 .collect(Collectors.toList());
     }
-    public Object findPizzaById(Long id) {
-        Optional<Optional<Pizza>> pizzas;
-        if (id != null) {
-            return pizzas = Optional.of(Optional.of(pizzaRepo.findById(id).get()));
-        } else {
-            return pizzas = pizzaRepo.findAllById((Long) null);
-        }
+//    public Object findPizzaById(Long id) {
+//        Optional<Optional<Pizza>> pizzas;
+//        if (id != null) {
+//            return pizzas = Optional.of(Optional.of(pizzaRepo.findById(id).get()));
+//        } else {
+//            return pizzas = pizzaRepo.findAllById(null);
+//        }
 
     }
 
 
-}
+

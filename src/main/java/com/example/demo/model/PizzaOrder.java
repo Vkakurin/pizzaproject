@@ -4,10 +4,7 @@ import lombok.Data;
 import lombok.Getter;
 import lombok.Setter;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 
 @Entity
 @Setter
@@ -21,14 +18,23 @@ public class PizzaOrder {
     private String nameCustomer;
     private String addressDelivery;
     private String phoneCustomer;
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "id")
+    private Pizza pizza;
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "cafeId")
+    private Cafe cafe;
 
-
-    public PizzaOrder(String nameCustomer, String addressDelivery, String phoneCustomer) {
+    public PizzaOrder(String nameCustomer, String addressDelivery, String phoneCustomer, Pizza pizza,Cafe cafe) {
         this.nameCustomer = nameCustomer;
         this.addressDelivery = addressDelivery;
         this.phoneCustomer = phoneCustomer;
+        this.pizza = pizza;
+        this.cafe= cafe;
 
     }
+
+
 
     public PizzaOrder() {
     }
