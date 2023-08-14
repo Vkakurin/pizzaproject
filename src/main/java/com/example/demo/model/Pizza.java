@@ -2,8 +2,10 @@ package com.example.demo.model;
 
 
 import lombok.*;
+import org.hibernate.validator.constraints.Length;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotBlank;
 
 
 @Entity
@@ -13,6 +15,8 @@ public class Pizza {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
+    @NotBlank(message = "Please fill the pizzaName")//or "pizzaName cannot be empty"
+    @Length(max=255, message = "")
 
     private String pizzaName;
     private String size;

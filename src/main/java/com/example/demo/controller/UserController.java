@@ -4,6 +4,7 @@ import com.example.demo.model.enums.Role;
 import com.example.demo.model.User;
 import com.example.demo.repos.UserRepo;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -15,8 +16,7 @@ import java.util.stream.Collectors;
 
 @Controller
 @RequestMapping("/user")
-
-// todo добавить права Админа
+@PreAuthorize("hasAuthority('ADMIN')")
 public class UserController {
     @Autowired
     private UserRepo userRepo;
@@ -44,7 +44,7 @@ public class UserController {
     public String userSave( // требуем параметры в методе
             @RequestParam String username,
             @RequestParam Map<String, String> form,
-            @RequestParam("UserId") User user
+            @RequestParam("userId") User user
     ) {
         user.setUsername(username);// меняем имя пользователя
         Set<String> roles = Arrays.stream((Role.values()))//помещаем в сэт роли пользователей и разворачиваем в строки

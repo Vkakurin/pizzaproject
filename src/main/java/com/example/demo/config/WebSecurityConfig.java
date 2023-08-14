@@ -3,6 +3,7 @@ package com.example.demo.config;
 import com.example.demo.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
@@ -11,14 +12,14 @@ import org.springframework.security.crypto.password.NoOpPasswordEncoder;
 
 import javax.sql.DataSource;
 
+import static com.example.demo.model.enums.Role.ADMIN;
+import static org.springframework.security.authorization.AuthorityReactiveAuthorizationManager.hasAuthority;
+
 
 @Configuration
 @EnableWebSecurity
-// todo добавить права Админа
 
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter { // Подключаем WebSecurityConfigurerAdapter. Используется до версии Spring Boot 3. Нужно указать такую же версию в pom.xml
-    @Autowired
-    private DataSource dataSource;//Объект за взаимодействие с БД
     @Autowired
     private UserService userService;
 
