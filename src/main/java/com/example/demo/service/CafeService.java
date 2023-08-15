@@ -26,4 +26,17 @@ public class CafeService {
         return StreamSupport.stream(cafeRepo.findAll().spliterator(), false)
                 .collect(Collectors.toList());
     }
+    public List<Cafe> findPizzaByName(String filter) {
+        return cafeRepo.findByNameCafe(filter);
+    }
+    public void findCafeById(String id) {
+        cafeRepo.findById(Long.valueOf(id));
+
+
+    }
+    public void save( String nameCafe,
+                      String address,
+                      String phone) {
+        cafeRepo.save(new Cafe(nameCafe, address, phone));
+    }
 }

@@ -10,4 +10,7 @@ import java.util.List;
 public interface UserRepo extends JpaRepository<User, Long> {
     User findByUsername(String username);// добвляю метод для поиска пользователя по имени
 
+
+
+
 }

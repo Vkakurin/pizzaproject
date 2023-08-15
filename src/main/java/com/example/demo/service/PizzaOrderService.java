@@ -2,9 +2,12 @@ package com.example.demo.service;
 
 
 
+import com.example.demo.model.Cafe;
+import com.example.demo.model.Pizza;
 import com.example.demo.model.PizzaOrder;
 import com.example.demo.repos.PizzaOrderRepo;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -13,18 +16,34 @@ import java.util.stream.StreamSupport;
 @Service
 public class PizzaOrderService {
 
-    private final PizzaOrderRepo orderRepo;
+    private final PizzaOrderRepo pizzaOrderRepo;
 
-    public PizzaOrderService(PizzaOrderRepo orderRepo) {
-        this.orderRepo = orderRepo;
+    public PizzaOrderService(PizzaOrderRepo pizzaOrderRepo) {
+        this.pizzaOrderRepo = pizzaOrderRepo;
     }
 
+
     public void deleteOrderById(Long id) {
-        orderRepo.deleteById(id);
+        pizzaOrderRepo.deleteById(id);
     }
 
     public List<PizzaOrder> getAllOrders() {
-        return StreamSupport.stream(orderRepo.findAll().spliterator(), false)
+        return StreamSupport.stream(pizzaOrderRepo.findAll().spliterator(), false)
                 .collect(Collectors.toList());
     }
+    public void save(
+                      String nameCustomer,
+                      String addressDelivery,
+                      String phoneCustomer,
+                      Pizza pizza,
+                      Cafe cafe
+            ) {
+        pizzaOrderRepo.save(new PizzaOrder(nameCustomer, addressDelivery, phoneCustomer, pizza, cafe));
+    }
+
+    public List<PizzaOrder> findPizzaByName(String filter) {
+        return pizzaOrderRepo.findByNameCustomer(filter);
+    }
+
+
 }

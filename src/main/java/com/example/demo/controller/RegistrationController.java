@@ -3,8 +3,10 @@ package com.example.demo.controller;
 import com.example.demo.model.enums.Role;
 import com.example.demo.model.User;
 import com.example.demo.repos.UserRepo;
+import com.example.demo.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 
@@ -13,25 +15,24 @@ import java.util.Map;
 
 @Controller
 public class RegistrationController {
-    @Autowired
-    private UserRepo userRepo;
 
+    @Autowired
+    private UserService userService;
     @GetMapping("/registration")
     public String registration() {
         return "registration";
     }
 
     @PostMapping("/registration")
-    public String addUser(User user, Map<String, Object> model) {
-        User userFromDb;
-        userFromDb = userRepo.findByUsername(user.getUsername());
+    public String addUser(User user, Model model) {
+        User userFromDb = userService.findByUsername(user);
         if (userFromDb != null) {
-            model.put("message", "User exist!");
+            model.addAttribute("message", "User exist!");
             return "registration";
         }
         user.setActive(true);
         user.setRoles(Collections.singleton(Role.USER));// назначаем роль
-        userRepo.save(user);
+       userService.save(user);
         return "redirect:/login";
     }
 

@@ -20,9 +20,17 @@
 </form>
 
 <form method="get" action="/deleteCafe">
-    <input type="text" name="cafeId" placeholder="Enter Id " >
+    <input type="" name="cafeId" placeholder="Enter cafeId " >
     <button type="submit">Delete cafe by Id</button>
 </form>
+
+<form method="get" action="/findCafeById">
+    <input type="" name="cafeId" placeholder="Enter cafeId " >
+    <button type="submit">Find cafe by Id</button>
+</form>
+<div>Is Find CafeId</div>
+
+
 <div>List of cafe</div>
 {{#cafes}}
     <div>

@@ -1,6 +1,7 @@
 package com.example.demo.controller;
 
 import com.example.demo.model.Cafe;
+import com.example.demo.model.Pizza;
 import com.example.demo.repos.CafeRepo;
 import com.example.demo.service.CafeService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,26 +16,27 @@ import java.util.Map;
 
 @Controller
 public class CafeController {
-    @Autowired
-    private  CafeRepo cafeRepo;
+
     private final CafeService cafeService;
 
     public CafeController(CafeService cafeService) {
         this.cafeService = cafeService;
     }
+    Iterable<Cafe> cafes;
+
 
     @GetMapping("/cafe")
     public String getCafeByName(
             @RequestParam(required = false, defaultValue = "") String filter,
-            Map<String, Object> model) {
-        Iterable<Cafe> cafes;
+            Model model) {
+
         if (filter != null && !filter.isEmpty()) {
-            cafes = cafeRepo.findByNameCafe(filter);
+            cafes = cafeService.findPizzaByName(filter);
         } else {
-            cafes = cafeRepo.findAll();
+            cafes = cafeService.getAllCafes();
         }
-        model.put("cafes", cafes);
-        model.put("filter",filter);
+        model.addAttribute("cafes", cafes);
+        model.addAttribute("filter",filter);
         return "cafe";
     }
 
@@ -44,18 +46,35 @@ public class CafeController {
             @RequestParam String address,
             @RequestParam String phone,
             Model model) {
-        Cafe cafe = new Cafe(nameCafe, address, phone);
-        cafeRepo.save(cafe);
-        Iterable<Cafe> cafes = cafeRepo.findAll();
+
+        cafeService.save(nameCafe, address, phone);
+        Iterable<Cafe> cafes = cafeService.getAllCafes();
         model.addAttribute("cafes", cafes);
         return "redirect:/cafe";
+
+
+
     }
-    @GetMapping("/deleteCafe/{id}")
+    @GetMapping("/deleteCafe{cafeId}")
     public String deleteCafeById(
             Model model,
-            @PathVariable Long id){
-        cafeService.deleteCafeById(id);
-        model.addAttribute("cafe", cafeService.getAllCafes());
+            @RequestParam(required = false, defaultValue = "") String cafeId){
+        cafeService.deleteCafeById(Long.valueOf(cafeId));
+        model.addAttribute("cafes", cafeService.getAllCafes());
+        return "redirect:/cafe";
+    }
+    //todo
+    @GetMapping("/findCafeById{cafeId}")
+    public String findCafeById(
+            Model model,
+            @RequestParam(required = false, defaultValue = "") String cafeId){
+        if (cafeId != null && !cafeId.isEmpty()) {
+            cafeService.findCafeById(cafeId);
+        } else {
+            cafes = cafeService.getAllCafes();
+        }
+
+        model.addAttribute("cafes", cafes);
         return "redirect:/cafe";
     }
 }

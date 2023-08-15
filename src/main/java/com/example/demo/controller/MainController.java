@@ -24,19 +24,6 @@ public class MainController {
        public String main(){
         return "main";
     }
-//    @GetMapping("/main")
-//    public String main(
-//            @RequestParam(required = false, defaultValue = "") String filter,
-//            Map<String, Object> model) {
-//        Iterable<Pizza> pizzas;
-//        if (filter != null && !filter.isEmpty()) {
-//            pizzas = pizzaRepo.findByPizzaName(filter);
-//        } else {
-//            pizzas = pizzaRepo.findAll();
-//        }
-//        model.put("pizzas", pizzas);
-//        model.put("filter", filter);
-//        return "main";
-//    }
+
 
 }

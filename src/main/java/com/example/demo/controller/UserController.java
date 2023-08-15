@@ -2,7 +2,7 @@ package com.example.demo.controller;
 
 import com.example.demo.model.enums.Role;
 import com.example.demo.model.User;
-import com.example.demo.repos.UserRepo;
+import com.example.demo.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
@@ -18,8 +18,9 @@ import java.util.stream.Collectors;
 @RequestMapping("/user")
 @PreAuthorize("hasAuthority('ADMIN')")
 public class UserController {
+
     @Autowired
-    private UserRepo userRepo;
+    private UserService userService;
 
     /**
      * метод принимающий модель для ввода пользователей в браузер
@@ -28,7 +29,7 @@ public class UserController {
      */
     @GetMapping()
     public String userList(Model model) {
-        model.addAttribute("users", userRepo.findAll());
+        model.addAttribute("users", userService.getAll());
         return "userList";// возврвщаем view-файл в ресурсах,которй будет виден пользователю
     }
 
@@ -58,17 +59,17 @@ public class UserController {
             }
         }
 
-        userRepo.save(user);//добавляем в депозиторий изменения юзера с новой ролью  в бд
+        userService.save(user);//добавляем в депозиторий изменения юзера с новой ролью  в бд
         return "redirect:/user";
     }
 
     @GetMapping("/deleteUser/{id}")
-    public String deleteUser(
+    public String deleteUserById(
             Model model,
             @PathVariable Long id) {
 
-        userRepo.deleteById(id);
-        model.addAttribute("user", userRepo.findAll());
+        userService.deleteById(id);
+        model.addAttribute("user", userService.getAll());
         return "redirect:/user";
     }
 }

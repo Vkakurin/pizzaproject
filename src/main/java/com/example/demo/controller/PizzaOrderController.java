@@ -3,9 +3,7 @@ package com.example.demo.controller;
 import com.example.demo.model.Cafe;
 import com.example.demo.model.Pizza;
 import com.example.demo.model.PizzaOrder;
-import com.example.demo.repos.PizzaOrderRepo;
 import com.example.demo.service.PizzaOrderService;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -17,13 +15,12 @@ import org.springframework.web.bind.annotation.RequestParam;
 @Controller
 
 public class PizzaOrderController {
-    @Autowired
-    private PizzaOrderRepo orderRepo;
 
-    private final PizzaOrderService orderService;
 
-    public PizzaOrderController(PizzaOrderService orderService) {
-        this.orderService = orderService;
+    private final PizzaOrderService pizzaOrderService;
+
+    public PizzaOrderController(PizzaOrderService pizzaOrderService) {
+        this.pizzaOrderService = pizzaOrderService;
     }
 
 
@@ -33,9 +30,9 @@ public class PizzaOrderController {
             Model model) {
         Iterable<PizzaOrder> orders;
         if (filter != null && !filter.isEmpty()) {
-            orders = orderRepo.findByNameCustomer(filter);
+            orders = pizzaOrderService.findPizzaByName(filter);
         } else {
-            orders = orderRepo.findAll();
+            orders = pizzaOrderService.getAllOrders();
         }
         model.addAttribute("pizzaOrders", orders);
         model.addAttribute("filter", filter);
@@ -45,35 +42,35 @@ public class PizzaOrderController {
 
     @PostMapping("/pizzaOrder")
     public String addOrder(
-            @AuthenticationPrincipal Cafe cafe,
+
             @RequestParam String nameCustomer,
             @RequestParam String addressDelivery,
             @RequestParam String phoneCustomer,
             @AuthenticationPrincipal Pizza pizza,
+            @AuthenticationPrincipal Cafe cafe,
             Model model) {
-        PizzaOrder pizzaOrder = new PizzaOrder(nameCustomer, addressDelivery, phoneCustomer, pizza, cafe);
-        orderRepo.save(pizzaOrder);
-        Iterable<PizzaOrder> pizzaOrders = orderRepo.findAll();
+        pizzaOrderService.save(nameCustomer, addressDelivery, phoneCustomer, pizza, cafe);
+        Iterable<PizzaOrder> pizzaOrders = pizzaOrderService.getAllOrders();
         model.addAttribute("pizzaOrders", pizzaOrders);
         return "redirect:/pizzaOrder";
     }
 
-    @GetMapping("/deleteOrder/{id}")
+    @GetMapping("/deleteOrder{order_id}")
     public String deleteOrder(
             Model model,
-            @PathVariable Long id) {
+            @RequestParam(required = false, defaultValue = "") String order_id) {
 
-        orderService.deleteOrderById(id);
-        model.addAttribute("pizzaOrder", orderService.getAllOrders());
+        pizzaOrderService.deleteOrderById(Long.valueOf(order_id));
+        model.addAttribute("pizzaOrder", pizzaOrderService.getAllOrders());
         return "redirect:/pizzaOrder";
     }
-
-    @GetMapping("/getOrder/{id}")
+//todo
+    @GetMapping("/getOrder{id}")
     public String getOrder(
             Model model,
             @PathVariable Long id
     ) {
-        model.addAttribute("pizzaOrder", orderService.getAllOrders());
+        model.addAttribute("pizzaOrder", pizzaOrderService.getAllOrders());
 
         return "redirect:/pizzaOrder";
     }
