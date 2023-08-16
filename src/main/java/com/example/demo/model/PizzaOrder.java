@@ -34,8 +34,12 @@ public class PizzaOrder {
 
     }
 
-
-
+    public String pizzaNameInOrder(){
+        return pizza != null ? pizza.getPizzaName() : "<none>";
+    }
+    public String cafeNameInOrder(){
+        return cafe != null ? cafe.getNameCafe() : "<none>";
+    }
     public PizzaOrder() {
     }
 }

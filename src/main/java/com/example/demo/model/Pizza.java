@@ -9,8 +9,7 @@ import javax.validation.constraints.NotBlank;
 
 
 @Entity
-@Getter
-@Setter
+@Data
 public class Pizza {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)

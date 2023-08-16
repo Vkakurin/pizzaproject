@@ -9,10 +9,9 @@
         <input type="text" name="nameCustomer" placeholder="Enter nameCustomer">
         <input type="text" name="addressDelivery" placeholder="Enter address">
         <input type="text" name="phoneCustomer" placeholder="Enter phone">
-        <input type="text" name="cafeId" placeholder="Enter cafeId">
-        <input type="text" name="id" placeholder="Enter pizzaId">
-
-        <button type="submit">Add Customer</button>
+        <input type="" name="id" placeholder="Enter pizzaId">
+        <input type="" name="cafeId" placeholder="Enter cafeId">
+        <button type="submit">Add Order</button>
     </form>
 </div>
 
@@ -28,18 +27,53 @@
     <button type="submit">Delete order by Id</button>
 </form>
 
+<h3><div>List of Orders</div></h3>
 
-<div>List of orders</div>
 {{#pizzaOrders}}
     <div>
         <b>{{order_id}}</b>
         <span>{{nameCustomer}}</span>
         <span>{{addressDelivery}}</span>
         <span>{{phoneCustomer}}</span>
-
+        <span>{{pizza}}</span>
+        <span>{{cafe}}</span>
     </div>
 
 {{/pizzaOrders}}
+<h3><div>List of pizza</div></h3>
 
+{{#pizzas}}
+    <div>
+        <b>{{id}}</b>
+        <span>{{pizzaName}}</span>
+        <span>{{size}}</span>
+        <span>{{description}}</span>
+        <span>{{price}}</span>
+    </div>
+
+{{/pizzas}}
+
+<h3><div>List of cafe</div></h3>
+
+{{#cafes}}
+    <div>
+        <b>{{cafeId}}</b>
+        <span>{{nameCafe}}</span>
+        <span>{{address}}</span>
+        <span>{{phone}}</span>
+    </div>
+
+{{/cafes}}
+<!--<h3><div>Order of pizza</div></h3>-->
+<!--<div>-->
+<!--    <form method="post"  >-->
+
+<!--        <input type="" name="id" placeholder="Enter pizzaId">-->
+<!--        <input type="" name="cafeId" placeholder="Enter cafeId">-->
+<!--        <input type="" name="order_id" placeholder="Enter orderId">-->
+
+<!--        <button type="submit">Add the Order</button>-->
+<!--    </form>-->
+<!--    </div>-->
 </body>
 </html>
