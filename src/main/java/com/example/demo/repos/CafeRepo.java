@@ -8,4 +8,5 @@ import java.util.List;
 
 public interface CafeRepo extends CrudRepository<Cafe, Long> {
     List<Cafe> findByNameCafe(String nameCafe);
+
 }

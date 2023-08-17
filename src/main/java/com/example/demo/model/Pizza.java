@@ -10,6 +10,8 @@ import javax.validation.constraints.NotBlank;
 
 @Entity
 @Data
+@Setter
+@Getter
 public class Pizza {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -22,15 +24,24 @@ public class Pizza {
     private String description;
     private Double price;
 
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "cafeId")
+    private Cafe cafe;
 
 
-    public Pizza(String pizzaName, String size, String description, Double price) {
+
+    public Pizza(String pizzaName, String size, String description, Double price, Cafe cafe) {
         this.pizzaName = pizzaName;
         this.size = size;
         this.description = description;
         this.price = price;
-
+        this.cafe = cafe;
     }
+    public String getCafeId(){
+        return cafe != null ? String.valueOf(cafe.getCafeId()) : "<none>";
+    }
+
+
 
     public Pizza() {
 

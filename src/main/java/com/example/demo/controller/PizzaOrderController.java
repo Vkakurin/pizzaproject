@@ -6,7 +6,6 @@ import com.example.demo.model.PizzaOrder;
 import com.example.demo.service.CafeService;
 import com.example.demo.service.PizzaOrderService;
 import com.example.demo.service.PizzaService;
-import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -39,27 +38,31 @@ public class PizzaOrderController {
         Iterable<Pizza> pizzas = pizzaService.getAllPizzas();
         Iterable<Cafe> cafes = cafeService.getAllCafes();
         model.addAttribute("pizzas", pizzas);
-        model.addAttribute("cafes", cafes);
         model.addAttribute("pizzaOrders", orders);
         model.addAttribute("filter", filter);
+        model.addAttribute("cafes", cafes);
         return "pizzaOrder";
     }
 
 
     @PostMapping("/pizzaOrder")
     public String addOrder(
-//            @RequestParam(required = false, defaultValue = "") String id,
-//            @RequestParam(required = false, defaultValue = "") String cafeId,
             @RequestParam String nameCustomer,
             @RequestParam String addressDelivery,
             @RequestParam String phoneCustomer,
             @RequestParam("id") Pizza pizza,
-            @RequestParam("cafeId") Cafe cafe,
-            Model model) {
-        pizzaOrderService.save(nameCustomer, addressDelivery, phoneCustomer, pizza, cafe);
+            Model model
+    ) {
+        pizzaOrderService.save(nameCustomer, addressDelivery, phoneCustomer, pizza);
         Iterable<PizzaOrder> pizzaOrders = pizzaOrderService.getAllOrders();
-        System.out.println("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!"+pizzaOrders);
+        Iterable<Pizza> pizzas = pizzaService.getAllPizzas();
+
+
+        System.out.println("++++++++++++++++++++++++++++++" + pizza);
         model.addAttribute("pizzaOrders", pizzaOrders);
+        model.addAttribute("pizzas", pizzas);
+
+        model.addAttribute("pizza", pizza);
 
         return "redirect:/pizzaOrder";
     }

@@ -25,21 +25,30 @@ public class PizzaOrder {
     @JoinColumn(name = "cafeId")
     private Cafe cafe;
 
-    public PizzaOrder(String nameCustomer, String addressDelivery, String phoneCustomer, Pizza pizza,Cafe cafe) {
+
+
+
+    public PizzaOrder(String nameCustomer, String addressDelivery, String phoneCustomer, Pizza pizza) {
         this.nameCustomer = nameCustomer;
         this.addressDelivery = addressDelivery;
         this.phoneCustomer = phoneCustomer;
         this.pizza = pizza;
-        this.cafe= cafe;
+
+
 
     }
-
-    public String pizzaNameInOrder(){
+    public String getPizzaId(){
+        return pizza != null ? String.valueOf(pizza.getId()) : "<none>";
+    }
+    public String getPizzaName(){
         return pizza != null ? pizza.getPizzaName() : "<none>";
     }
-    public String cafeNameInOrder(){
-        return cafe != null ? cafe.getNameCafe() : "<none>";
-    }
+
+    public String getNameCafes(){
+        return cafe != null ? cafe.getNameCafe() : "<none>";   }
+
+
     public PizzaOrder() {
+
     }
 }

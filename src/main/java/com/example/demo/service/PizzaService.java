@@ -1,14 +1,11 @@
 package com.example.demo.service;
 
+import com.example.demo.model.Cafe;
 import com.example.demo.model.Pizza;
 import com.example.demo.repos.PizzaRepo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.RequestParam;
-
-import java.util.Collections;
 import java.util.List;
-import java.util.Optional;
 import java.util.stream.Collectors;
 import java.util.stream.StreamSupport;
 
@@ -39,8 +36,10 @@ public class PizzaService {
     public void save(String pizzaName,
                      String size,
                      String description,
-                     Double price) {
-        pizzaRepo.save(new Pizza(pizzaName, size, description, price));
+                     Double price,
+                     Cafe cafe
+    ) {
+        pizzaRepo.save(new Pizza(pizzaName, size, description, price, cafe));
     }
 
 }

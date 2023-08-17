@@ -30,13 +30,14 @@ public class CafeService {
         return cafeRepo.findByNameCafe(filter);
     }
     public void findCafeById(String id) {
-        cafeRepo.findById(Long.valueOf(id));
+        cafeRepo.deleteById(Long.valueOf(id));
 
 
     }
     public void save( String nameCafe,
                       String address,
-                      String phone) {
+                      String phone
+    ) {
         cafeRepo.save(new Cafe(nameCafe, address, phone));
     }
 }

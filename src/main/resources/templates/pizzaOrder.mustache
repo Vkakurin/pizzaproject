@@ -10,7 +10,6 @@
         <input type="text" name="addressDelivery" placeholder="Enter address">
         <input type="text" name="phoneCustomer" placeholder="Enter phone">
         <input type="" name="id" placeholder="Enter pizzaId">
-        <input type="" name="cafeId" placeholder="Enter cafeId">
         <button type="submit">Add Order</button>
     </form>
 </div>
@@ -33,10 +32,11 @@
     <div>
         <b>{{order_id}}</b>
         <span>{{nameCustomer}}</span>
-        <span>{{addressDelivery}}</span>
+        <strong>{{addressDelivery}}</strong>
         <span>{{phoneCustomer}}</span>
-        <span>{{pizza}}</span>
-        <span>{{cafe}}</span>
+        <strong>{{getPizzaId}}</strong>
+        <span>{{getPizzaName}}</span>
+
     </div>
 
 {{/pizzaOrders}}
@@ -46,9 +46,10 @@
     <div>
         <b>{{id}}</b>
         <span>{{pizzaName}}</span>
-        <span>{{size}}</span>
+        <strong>{{size}}</strong>
         <span>{{description}}</span>
         <span>{{price}}</span>
+        <strong>{{getCafeId}}</strong>
     </div>
 
 {{/pizzas}}
@@ -58,22 +59,12 @@
 {{#cafes}}
     <div>
         <b>{{cafeId}}</b>
-        <span>{{nameCafe}}</span>
+        <strong>{{nameCafe}}</strong>
         <span>{{address}}</span>
-        <span>{{phone}}</span>
+        <strong>{{phone}}</strong>
     </div>
 
 {{/cafes}}
-<!--<h3><div>Order of pizza</div></h3>-->
-<!--<div>-->
-<!--    <form method="post"  >-->
 
-<!--        <input type="" name="id" placeholder="Enter pizzaId">-->
-<!--        <input type="" name="cafeId" placeholder="Enter cafeId">-->
-<!--        <input type="" name="order_id" placeholder="Enter orderId">-->
-
-<!--        <button type="submit">Add the Order</button>-->
-<!--    </form>-->
-<!--    </div>-->
 </body>
 </html>

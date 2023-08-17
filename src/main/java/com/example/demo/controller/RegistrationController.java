@@ -32,7 +32,17 @@ public class RegistrationController {
         }
         user.setActive(true);
         user.setRoles(Collections.singleton(Role.USER));// назначаем роль
-       userService.save(user);
+        //user.setCode(UUID.randomUUID().toString();
+        //user.setPassword(passwordEncoder.encoder(user.getPassword()));//назначаем пользователю зашифрованный пароль
+     //  String message = String.format("Hello<%\n" +
+      //         "Привет")
+
+
+
+
+
+
+        userService.save(user);
         return "redirect:/login";
     }
 

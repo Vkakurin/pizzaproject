@@ -31,14 +31,15 @@ public class PizzaOrderService {
         return StreamSupport.stream(pizzaOrderRepo.findAll().spliterator(), false)
                 .collect(Collectors.toList());
     }
-    public void save(
-                      String nameCustomer,
+    public void save( String nameCustomer,
                       String addressDelivery,
                       String phoneCustomer,
-                      Pizza pizza,
-                      Cafe cafe
+                      Pizza pizza
+
             ) {
-        pizzaOrderRepo.save(new PizzaOrder(nameCustomer, addressDelivery, phoneCustomer, pizza, cafe));
+
+        pizzaOrderRepo.save(new PizzaOrder(nameCustomer,addressDelivery,phoneCustomer,pizza));
+
     }
 
     public List<PizzaOrder> findPizzaByName(String filter) {
