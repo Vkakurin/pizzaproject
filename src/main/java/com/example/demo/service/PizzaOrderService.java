@@ -1,13 +1,11 @@
 package com.example.demo.service;
 
 
-
-import com.example.demo.model.Cafe;
 import com.example.demo.model.Pizza;
 import com.example.demo.model.PizzaOrder;
 import com.example.demo.repos.PizzaOrderRepo;
+import com.example.demo.repos.PizzaRepo;
 import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -17,9 +15,12 @@ import java.util.stream.StreamSupport;
 public class PizzaOrderService {
 
     private final PizzaOrderRepo pizzaOrderRepo;
+    private final PizzaRepo pizzaRepo;
 
-    public PizzaOrderService(PizzaOrderRepo pizzaOrderRepo) {
+
+    public PizzaOrderService(PizzaOrderRepo pizzaOrderRepo, PizzaRepo pizzaRepo) {
         this.pizzaOrderRepo = pizzaOrderRepo;
+        this.pizzaRepo = pizzaRepo;
     }
 
 
@@ -31,20 +32,19 @@ public class PizzaOrderService {
         return StreamSupport.stream(pizzaOrderRepo.findAll().spliterator(), false)
                 .collect(Collectors.toList());
     }
-    public void save( String nameCustomer,
-                      String addressDelivery,
-                      String phoneCustomer,
-                      Pizza pizza
 
-            ) {
-
-        pizzaOrderRepo.save(new PizzaOrder(nameCustomer,addressDelivery,phoneCustomer,pizza));
-
+    public void save(String nameCustomer,
+                     String addressDelivery,
+                     String phoneCustomer,
+                     Pizza pizza
+    ) {
+        pizzaOrderRepo.save(new PizzaOrder(nameCustomer, addressDelivery, phoneCustomer, pizza));
     }
 
     public List<PizzaOrder> findPizzaByName(String filter) {
         return pizzaOrderRepo.findByNameCustomer(filter);
     }
+
 
 
 }

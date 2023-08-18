@@ -25,6 +25,11 @@ public class User implements UserDetails {
     private String username;
     private String password;
     private boolean active;//активен ли пользователь
+    private String email;
+    private String activationCode;
+
+
+
 
     @ElementCollection(targetClass = Role.class,fetch =FetchType.EAGER )//данные из Енам
     @CollectionTable(name = "user_role",joinColumns = @JoinColumn(name = "user_id"))
@@ -32,15 +37,38 @@ public class User implements UserDetails {
     private Set<Role> roles;//назначаем атрибуту Set (ролей)
 
 
-    public User(String username, String password, boolean active, Set<Role> roles) {
+    public User(Long user_id, String username, String password, boolean active, String email, String activationCode, Set<Role> roles) {
+        this.user_id = user_id;
         this.username = username;
         this.password = password;
         this.active = active;
+        this.email = email;
+        this.activationCode = activationCode;
         this.roles = roles;
     }
 
+
     public User() {
 
+    }
+    public String getCodeForUserList(){
+        return activationCode != null ? getActivationCode() : "<none>";   }
+    public String getEmailForUserList(){
+        return email != null ? getEmail() : "<none>";   }
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public String getActivationCode() {
+        return activationCode;
+    }
+
+    public void setActivationCode(String activationCode) {
+        this.activationCode = activationCode;
     }
 
     @Override

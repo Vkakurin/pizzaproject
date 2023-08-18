@@ -27,11 +27,11 @@
 </form>
 
 <h3><div>List of pizza</div></h3>
-
+<h5><div>PizzaId PizzaName Size Description Price CafeId</div></h5>
 {{#pizzas}}
     <div>
         <b>{{id}}</b>
-        <span>{{pizzaName}}</span>
+        <strong>{{pizzaName}}</strong>
         <span>{{size}}</span>
         <span>{{description}}</span>
         <span>{{price}}</span>
@@ -40,15 +40,7 @@
 
 {{/pizzas}}
 <h3><div>List of cafe</div></h3>
-<h4><thead>
-<tr>
-    <th>CafeId</th><>
-    <th>NameCafe</th><--  >
-    <th>Address</th><--  >
-    <th>Phone</th>
-
-</tr>
-</thead></h4>
+<h5><div>CafeId NameCafe AddressCafe PhoneCafe</div></h5>
 
 {{#cafes}}
     <div>

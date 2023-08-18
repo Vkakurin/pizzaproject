@@ -13,8 +13,6 @@ import java.util.Map;
 
 @Controller
 public class MainController {
-    @Autowired
-    private PizzaRepo pizzaRepo;
 
     @GetMapping("")
     public String greeting(Model model) {

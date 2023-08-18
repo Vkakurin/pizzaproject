@@ -22,7 +22,7 @@ public class PizzaService {
         pizzaRepo.deleteById(id);
     }
     public void findPizzaById(Long id) {
-        pizzaRepo.findById(id).get();
+        pizzaRepo.findById(id);
     }
     public List<Pizza> findPizzaByName(String filter) {
         return pizzaRepo.findByPizzaName(filter);
@@ -41,7 +41,10 @@ public class PizzaService {
     ) {
         pizzaRepo.save(new Pizza(pizzaName, size, description, price, cafe));
     }
+    public boolean existsPizzaById(Long id) {
 
+        return pizzaRepo.existsById(id);
+    }
 }
 
 

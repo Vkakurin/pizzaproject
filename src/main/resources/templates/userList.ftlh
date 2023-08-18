@@ -29,6 +29,8 @@
             <th>UserName</th>
             <th>Password</th>
             <th>UserId</th>
+            <th>ActivationCode</th>
+            <th>Email</th>
         </tr>
         </thead>
         <tbody>
@@ -37,7 +39,8 @@
                 <td>${user.username}</td>
                 <td>${user.password}</td>
                 <td>${user.user_id}</td>
-
+                <td>${user.getCodeForUserList()}</td>
+                <td>${user.getEmailForUserList()}</td>
             </tr>
         </#list>
         </tbody>
@@ -45,4 +48,8 @@
 
 
     </table>
+    <form method="get" action="/user/deleteUser" >
+        <input type="" name="user_id"  placeholder="Enter userId" >
+        <button type="submit">Delete User by Id</button>
+    </form>
 </@c.page>

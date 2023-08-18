@@ -11,6 +11,6 @@ public interface UserRepo extends JpaRepository<User, Long> {
     User findByUsername(String username);// добвляю метод для поиска пользователя по имени
 
 
-
+    User findByActivationCode(String code);
 
 }

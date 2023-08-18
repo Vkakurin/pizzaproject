@@ -3,7 +3,10 @@
 <body>
 <a href="/main">Go to Main page</a>
 <h4>ORDER</h4>
-
+<h6><div>Attention!</div></h6>
+{{#message}}
+    {{message}}
+{{/message}}
 <div>
     <form method="post"  >
         <input type="text" name="nameCustomer" placeholder="Enter nameCustomer">
@@ -27,7 +30,7 @@
 </form>
 
 <h3><div>List of Orders</div></h3>
-
+<h5><div>OrderId NameCustomer AddressDelivery Phone PizzaIdInCafe PizzaName</div></h5>
 {{#pizzaOrders}}
     <div>
         <b>{{order_id}}</b>
@@ -41,7 +44,7 @@
 
 {{/pizzaOrders}}
 <h3><div>List of pizza</div></h3>
-
+<h5><div>PizzaId PizzaName Size Description Price CafeId</div></h5>
 {{#pizzas}}
     <div>
         <b>{{id}}</b>
@@ -55,7 +58,7 @@
 {{/pizzas}}
 
 <h3><div>List of cafe</div></h3>
-
+<h5><div>CafeId NameCafe AddressCafe PhoneCafe</div></h5>
 {{#cafes}}
     <div>
         <b>{{cafeId}}</b>
