@@ -8,6 +8,7 @@ import com.example.demo.repos.PizzaRepo;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Objects;
 import java.util.stream.Collectors;
 import java.util.stream.StreamSupport;
 
@@ -45,6 +46,31 @@ public class PizzaOrderService {
         return pizzaOrderRepo.findByNameCustomer(filter);
     }
 
+    /**
+     * Проверка наличия Пиццы-Кафе в листе заказа.
+     *
+     * @param id параметр номера Пицца-Кафе, которую выбирает Customer
+     * @return false , если Пицца-Кафе нет в Заказе.
+     * Если есть, нельзя сохранить эту пиццу в Заказ, т.к. уже заказана.
+     * проверка по введенному id : есть ли Id Пиццы-Кафе в списке Пиццы-Кафе
+     */
+    public boolean isPizzaIdExistInOrders(Long id) {
+        boolean flag = false;
+        List<PizzaOrder> pizzaOrders = getAllOrders();
+        for (PizzaOrder p : pizzaOrders) {
+            Long pizzaIdExistInOrder = p.getPizza().getId();
+            if (Objects.equals(id, pizzaIdExistInOrder)) {
+                flag = true;
+                break;
+            }
+        }
 
+        return flag;
+    }
+
+    public boolean isPizzaIdExistInPizza(Long id) {
+
+        return pizzaRepo.existsById(id);
+    }
 
 }

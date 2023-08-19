@@ -48,9 +48,11 @@ public class PizzaController {
             @RequestParam Double price,
             @RequestParam("cafeId") Cafe cafe,
             Model model) {
+
+
+
         pizzaService.save(pizzaName, size, description, price, cafe);
         Iterable<Pizza> pizzas = pizzaService.getAllPizzas();
-        System.out.println("//////////////////////////////////////" + cafe);
         model.addAttribute("pizzas", pizzas);
         model.addAttribute("cafe", cafe);
         return "redirect:/pizza";

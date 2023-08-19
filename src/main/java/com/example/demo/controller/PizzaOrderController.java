@@ -3,18 +3,12 @@ package com.example.demo.controller;
 import com.example.demo.model.Cafe;
 import com.example.demo.model.Pizza;
 import com.example.demo.model.PizzaOrder;
-import com.example.demo.model.User;
-import com.example.demo.repos.PizzaRepo;
 import com.example.demo.service.CafeService;
 import com.example.demo.service.PizzaOrderService;
 import com.example.demo.service.PizzaService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
-
-import java.util.Spliterator;
-
-import static org.springframework.data.jpa.domain.AbstractPersistable_.id;
 
 @Controller
 
@@ -53,7 +47,11 @@ public class PizzaOrderController {
         return "pizzaOrder";
     }
 
-    //todo
+    /**
+     * Method Post
+     * Проверка наличия Пиццы-Кафе в листе заказа. Если есть, нельзя записать эту пиццу в Заказ, т.к. уже заказана.
+     */
+
     @PostMapping("/pizzaOrder")
     public String addOrder(
             @RequestParam String nameCustomer,
@@ -63,22 +61,17 @@ public class PizzaOrderController {
             @RequestParam(required = false, defaultValue = "") Long id,
             Model model
     ) {
-        pizzaOrders = pizzaOrderService.getAllOrders();
-        System.out.println("//////////////" + pizza.getId() + "/////////////" + pizza);
-        if (id == id) {
-            System.out.println("------------------"+ pizzaOrders);
-            model.addAttribute("message", "This PizzaId exist! Get another PizzaId");
-            model.addAttribute("pizzaOrders", pizzaOrders);
-            return "redirect:/pizzaOrder";
 
+
+        if(! (!pizzaOrderService.isPizzaIdExistInOrders(id) && pizzaOrderService.isPizzaIdExistInPizza(id) ) ){
+            model.addAttribute("message", "This PizzaId exist! Get another PizzaId");
+            return "redirect:/pizzaOrder";
         } else {
             pizzaOrderService.save(nameCustomer, addressDelivery, phoneCustomer, pizza);
         }
-
-        pizzas = pizzaService.getAllPizzas();
-        model.addAttribute("pizzaOrders", pizzaOrders);
-        model.addAttribute("pizzas", pizzas);
-        model.addAttribute("pizza", pizza);
+        pizzaOrders = pizzaOrderService.getAllOrders();
+            model.addAttribute("pizzaOrders", pizzaOrders);
+            model.addAttribute("pizzas", pizzas);
 
         return "redirect:/pizzaOrder";
     }
@@ -93,7 +86,7 @@ public class PizzaOrderController {
         return "redirect:/pizzaOrder";
     }
 
-    //todo
+
     @GetMapping("/getOrder{id}")
     public String getOrder(
             Model model,
@@ -104,5 +97,15 @@ public class PizzaOrderController {
         return "redirect:/pizzaOrder";
     }
 
+//    public boolean isPizzaIdExist(Long id) {
+//        boolean flag =false;
+//        for (PizzaOrder p : pizzaOrders) {
+//            Long test = p.getPizza().getId();
+//            if (id == test) {
+//                return true;
+//            }
+//        }
+//        return flag;
+//    }
 
 }

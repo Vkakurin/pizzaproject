@@ -10,7 +10,4 @@ import java.util.Optional;
 public interface PizzaRepo extends CrudRepository<Pizza, Long> {
     List<Pizza> findByPizzaName(String pizzaName);
 
-
-
-
 }
