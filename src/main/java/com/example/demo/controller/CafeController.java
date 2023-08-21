@@ -27,7 +27,7 @@ public class CafeController {
             Model model) {
 
         if (filter != null && !filter.isEmpty()) {
-            cafes = cafeService.findPizzaByName(filter);
+            cafes = cafeService.findByNameCafe(filter);
         } else {
             cafes = cafeService.getAllCafes();
         }
@@ -35,7 +35,7 @@ public class CafeController {
         model.addAttribute("filter",filter);
         return "cafe";
     }
-
+//todo сделать защиту от набора несуществующего номера кафе
     @PostMapping("/cafe")
     public String addCafe(
             @RequestParam String nameCafe,

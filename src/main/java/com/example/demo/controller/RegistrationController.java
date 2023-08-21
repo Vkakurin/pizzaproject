@@ -8,6 +8,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 @Controller
 public class RegistrationController {
@@ -26,10 +27,13 @@ public class RegistrationController {
             return "registration";
         }
 
-        return "redirect:/login";
+        return "login";
     }
     @GetMapping("/activate/{code}")
-    public String activate(Model model, @PathVariable String code){
+    public String activate(
+            Model model,
+            @RequestParam(required = false, defaultValue = "") String code){
+
     boolean isActivated = userService.activateUser(code);
     if(isActivated){
         model.addAttribute("message", "User successfully activated!");
@@ -37,7 +41,7 @@ public class RegistrationController {
         model.addAttribute("massage", "ActivationCode is not found!");
     }
 
-       return  "login";
+       return  "registration";
     }
 
 

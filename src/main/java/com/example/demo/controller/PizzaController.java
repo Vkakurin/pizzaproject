@@ -8,12 +8,17 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+/**
+ *
+ */
+
 
 @Controller
 public class PizzaController {
     private final CafeService cafeService;
     private final PizzaService pizzaService;
     Iterable<Pizza> pizzas;
+    Iterable<Cafe> cafes;
 
     public PizzaController(CafeService cafeService, PizzaService pizzaService) {
         this.cafeService = cafeService;
@@ -47,11 +52,16 @@ public class PizzaController {
             @RequestParam String description,
             @RequestParam Double price,
             @RequestParam("cafeId") Cafe cafe,
+            @RequestParam Long cafeId,
             Model model) {
-
-
-
-        pizzaService.save(pizzaName, size, description, price, cafe);
+        if( !pizzaService.isCafeIdExistInCafe(cafeId))
+        {
+            System.out.println("///////////////////////////////////");
+            model.addAttribute("message", "This CafeId exist! Get another CafeId");
+            return "redirect:/pizza";
+        } else {
+            pizzaService.save(pizzaName, size, description, price, cafe);
+        }
         Iterable<Pizza> pizzas = pizzaService.getAllPizzas();
         model.addAttribute("pizzas", pizzas);
         model.addAttribute("cafe", cafe);

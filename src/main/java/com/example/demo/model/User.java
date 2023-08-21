@@ -6,37 +6,58 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.hibernate.validator.constraints.Length;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotBlank;
 import java.util.Collection;
 import java.util.Set;
+
+
+/**
+ * the User entity class with private fields in which
+ * will be recorded and stored in the database
+ */
 @Entity
 @Table(name = "usr")
-
-
-
 public class User implements UserDetails {
-  @Id
-  @GeneratedValue(strategy = GenerationType.AUTO)
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    @NotBlank(message = "OrderId cannot be empty")
     private Long user_id;
 
+    @Length(max=255, message = "Username can't  too long")
     private String username;
+
+    @Length(max=255, message = "password can't  too long")
     private String password;
+
+    /**
+     * Parameter: isActivateUser
+     */
     private boolean active;//активен ли пользователь
+
+    @Length(max=255, message = "email can't  too long")
     private String email;
+
+    @Length(max=511, message = "")
     private String activationCode;
 
-
-
-
-    @ElementCollection(targetClass = Role.class,fetch =FetchType.EAGER )//данные из Енам
-    @CollectionTable(name = "user_role",joinColumns = @JoinColumn(name = "user_id"))
+    /**
+     * make Set of Roles.
+     * Make  the table with columns "user_role" and "user_id"
+     */
+    @ElementCollection(targetClass = Role.class, fetch = FetchType.EAGER)//данные из Енам
+    @CollectionTable(name = "user_role", joinColumns = @JoinColumn(name = "user_id"))
     @Enumerated(EnumType.STRING)//указываем тип enum
     private Set<Role> roles;//назначаем атрибуту Set (ролей)
 
-
+    /**
+     * Constructor with all arguments.
+     * can be change annotation:"@AllArgsConstructor"
+     */
     public User(Long user_id, String username, String password, boolean active, String email, String activationCode, Set<Role> roles) {
         this.user_id = user_id;
         this.username = username;
@@ -46,15 +67,35 @@ public class User implements UserDetails {
         this.activationCode = activationCode;
         this.roles = roles;
     }
-
-
+    /**
+     * Constructor without arguments.
+     * can be change annotation:"@NoArgsConstructor"
+     */
     public User() {
 
     }
-    public String getCodeForUserList(){
-        return activationCode != null ? getActivationCode() : "<none>";   }
-    public String getEmailForUserList(){
-        return email != null ? getEmail() : "<none>";   }
+    /**
+     * method  to use parameter "activationCode" in "userList.ftlh"
+     * @return  activationCode or "<none>" if activationCode == null.
+     * I use this method to debug the frontend
+     */
+    public String getCodeForUserList() {
+        return activationCode != null ? getActivationCode() : "<none>";
+    }
+    /**
+     * method  to use parameter "email" in "userList.ftlh"
+     * @return email or "<none>" if email == null.
+     * I use this method to debug the frontend
+     */
+    public String getEmailForUserList() {
+        return email != null ? getEmail() : "<none>";
+    }
+
+    /***
+     * Getters and Setters all fields.
+     * Can be change annotation:"@Getter and @Setter" or "@Data "
+     * @return
+     */
     public String getEmail() {
         return email;
     }
@@ -76,6 +117,10 @@ public class User implements UserDetails {
         return getRoles();
     }
 
+    /**
+     * Override methods implement UserDetails to authorisation.
+     * @return
+     */
     @Override
     public boolean isAccountNonExpired() {
         return true;

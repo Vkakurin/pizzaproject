@@ -68,7 +68,8 @@ public class PizzaOrderController {
             return "redirect:/pizzaOrder";
         } else {
             pizzaOrderService.save(nameCustomer, addressDelivery, phoneCustomer, pizza);
-        }
+
+       }
         pizzaOrders = pizzaOrderService.getAllOrders();
             model.addAttribute("pizzaOrders", pizzaOrders);
             model.addAttribute("pizzas", pizzas);
@@ -96,16 +97,15 @@ public class PizzaOrderController {
 
         return "redirect:/pizzaOrder";
     }
+    @GetMapping("/deleteAllOrder")
+    public String deleteAllOrder(
+            Model model
 
-//    public boolean isPizzaIdExist(Long id) {
-//        boolean flag =false;
-//        for (PizzaOrder p : pizzaOrders) {
-//            Long test = p.getPizza().getId();
-//            if (id == test) {
-//                return true;
-//            }
-//        }
-//        return flag;
-//    }
+    ) {
+        pizzaOrderService.deleteAllOrders();
+        model.addAttribute("pizzaOrder", pizzaOrderService.getAllOrders());
+
+        return "redirect:/pizzaOrder";
+    }
 
 }

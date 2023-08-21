@@ -24,6 +24,7 @@ public class UserController {
 
     /**
      * метод принимающий модель для ввода пользователей в браузер
+     *
      * @param model сама модель
      * @return вщзвращаем список пользователей
      */
@@ -43,9 +44,9 @@ public class UserController {
 
     @PostMapping()
     public String userSave( // требуем параметры в методе
-            @RequestParam String username,
-            @RequestParam Map<String, String> form,
-            @RequestParam("userId") User user
+                            @RequestParam String username,
+                            @RequestParam Map<String, String> form,
+                            @RequestParam("userId") User user
     ) {
         user.setUsername(username);// меняем имя пользователя
         Set<String> roles = Arrays.stream((Role.values()))//помещаем в сэт роли пользователей и разворачиваем в строки
@@ -59,7 +60,7 @@ public class UserController {
             }
         }
 
-        userService.save(user);//добавляем в депозиторий изменения юзера с новой ролью  в бд
+            userService.save(user);//добавляем в депозиторий изменения юзера с новой ролью  в бд
         return "redirect:/user";
     }
 
@@ -68,7 +69,8 @@ public class UserController {
             Model model,
             @RequestParam(required = false, defaultValue = "") String user_id) {
 
-        userService.deleteById(Long.valueOf(user_id));
+        if (userService.isUserIdExist(user_id)){
+        userService.deleteById(Long.valueOf(user_id));}
         model.addAttribute("user", userService.getAll());
         return "redirect:/user";
     }

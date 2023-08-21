@@ -3,7 +3,6 @@ package com.example.demo.service;
 import com.example.demo.model.User;
 import com.example.demo.model.enums.Role;
 import com.example.demo.repos.UserRepo;
-import freemarker.template.utility.StringUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
@@ -14,6 +13,11 @@ import org.springframework.util.StringUtils;
 import java.util.Collections;
 import java.util.List;
 import java.util.UUID;
+
+
+/**
+ * Service CRUD Methods. I can use service for UserController via Repository.
+ */
 
 @Service
 public class UserService implements UserDetailsService {
@@ -32,8 +36,17 @@ public class UserService implements UserDetailsService {
 
     }
 
+    /**
+     * Method delete record User by "userId" from UserRepo.
+     *
+     * @param
+     */
     public void deleteById(Long id) {
         userRepo.deleteById(id);
+    }
+
+    public boolean isUserIdExist(String id) {
+        return userRepo.existsById(Long.valueOf(id));
     }
 
     public void save(User user) {

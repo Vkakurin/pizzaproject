@@ -32,41 +32,54 @@
 </form>
 
 <h3><div>List of Orders</div></h3>
-<h5><div>OrderId NameCustomer AddressDelivery Phone PizzaIdInCafe PizzaName</div></h5>
+<h5><div>OrderId <> NameCustomer <> AddressDelivery <> Phone <> PizzaIdInCafe <> PizzaName</div></h5>
 {{#pizzaOrders}}
     <div>
-        <b>{{order_id}}</b>
-        <span>{{nameCustomer}}</span>
-        <strong>{{addressDelivery}}</strong>
-        <span>{{phoneCustomer}}</span>
-        <strong>{{getPizzaId}}</strong>
-        <span>{{getPizzaName}}</span>
+        <b>{{order_id}}</b><  >
+        <span>{{nameCustomer}}</span><  >
+        <strong>{{addressDelivery}}</strong><  >
+        <span>{{phoneCustomer}}</span><  >
+        <strong>{{getPizzaId}}</strong><  >
+        <span>{{getPizzaName}}</span><  >
 
     </div>
+    {{#message}}
+        <span>{{message}}</span>
+    {{/message}}
 
 {{/pizzaOrders}}
+
+
+
+
+<form method="get" action="/deleteAllOrder">
+
+    <button type="submit">Delete ALL orders</button>
+</form>
+
 <h3><div>List of pizza</div></h3>
-<h5><div>PizzaId PizzaName Size Description Price CafeId</div></h5>
+<h5><div>PizzaId <> PizzaName <> Size <> Description <> Price <> CafeId</div></h5>
 {{#pizzas}}
     <div>
         <b>{{id}}</b>
-        <span>{{pizzaName}}</span>
-        <strong>{{size}}</strong>
-        <span>{{description}}</span>
-        <span>{{price}}</span>
+        <span>{{pizzaName}}</span><  >
+        <strong>{{size}}</strong><  >
+        <span>{{description}}</span><  >
+        <span>{{price}}</span><  >
         <strong>{{getCafeId}}</strong>
+
     </div>
 
 {{/pizzas}}
 
 <h3><div>List of cafe</div></h3>
-<h5><div>CafeId NameCafe AddressCafe PhoneCafe</div></h5>
+<h5><div>CafeId <> NameCafe <> AddressCafe <> PhoneCafe</div></h5>
 {{#cafes}}
     <div>
-        <b>{{cafeId}}</b>
-        <strong>{{nameCafe}}</strong>
-        <span>{{address}}</span>
-        <strong>{{phone}}</strong>
+        <b>{{cafeId}}</b><  >
+        <strong>{{nameCafe}}</strong><  >
+        <span>{{address}}</span><  >
+        <strong>{{phone}}</strong><  >
     </div>
 
 {{/cafes}}

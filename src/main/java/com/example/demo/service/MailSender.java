@@ -5,6 +5,11 @@ import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.stereotype.Service;
 //для работы Bean нужно добавить зависимомти в pom and application.properties
+
+
+/**
+ * Service method to make MailService to send email from username.
+ */
 @Service
 public class MailSender {
 
@@ -13,7 +18,7 @@ public class MailSender {
     public MailSender(JavaMailSender mailSender) {
         this.mailSender = mailSender;
     }
-
+     //todo ${spring.mail.username}
     @Value("${spring.mail.username}")
     private String username;
 
