@@ -13,7 +13,9 @@ import java.util.stream.Collectors;
 import java.util.stream.StreamSupport;
 
 /**
- * Service CRUD Methods. I can use service for CafeController via Repository.
+ * Service class uses Service CRUD methods to work with Repository.
+ *
+ * I can use service for CafeController via Repository.
  */
 @Service
 public class CafeService {
@@ -30,7 +32,11 @@ public class CafeService {
      * @param
      */
     public void deleteCafeById(Long id) {
+        if(cafeRepo.existsById(id)){
         cafeRepo.deleteById(id);
+        }else {
+            System.out.println("{{{{{{{{{{{{{{CafeId is missing in the CafeRepo}}}}}}}}}}}}");
+        }
     }
 
     /**

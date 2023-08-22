@@ -14,7 +14,8 @@ import java.util.stream.StreamSupport;
 
 
 /**
- * Service CRUD Methods. I can use service for PizzaOrderController via Repository.
+ * Service class CRUD Methods.
+ * I can use service for PizzaOrderController via Repository.
  */
 @Service
 public class PizzaOrderService {
@@ -29,11 +30,15 @@ public class PizzaOrderService {
     }
 
     /**
-     * Method delete records PizzaOrder by "orderId" from pizzaOrderRepo.
-     * @param
+     * Method delete records PizzaOrder by "orderId" from pizzaOrderRepo if PizzaOrderId is present.
+     * @param id
      */
     public void deleteOrderById(Long id) {
-        pizzaOrderRepo.deleteById(id);
+        if(pizzaOrderRepo.existsById(id)){
+        pizzaOrderRepo.deleteById(id);}
+        else {
+            System.out.println("{{{{{{{{{{{PizzaOrderId is missing in the PizzaRepo}}}}}}}}}}}}}}");
+        }
     }
 
     /**
@@ -47,7 +52,10 @@ public class PizzaOrderService {
 
     /**
      * Method put records to new PizzaOrder into PizzaOrderRepo.
-     * @param
+     * @param nameCustomer
+     * @param addressDelivery
+     * @param phoneCustomer
+     * @param pizza pizza
      */
     public void save(String nameCustomer,
                      String addressDelivery,
@@ -99,6 +107,10 @@ public class PizzaOrderService {
         return pizzaRepo.existsById(id);
     }
 
+    /**
+     * Method delete all records PizzaOrders  from pizzaOrderRepo.
+     * @param
+     */
     public void deleteAllOrders() {
         pizzaOrderRepo.deleteAll();
     }

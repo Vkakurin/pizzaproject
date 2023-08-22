@@ -5,12 +5,16 @@ import org.springframework.data.repository.CrudRepository;
 
 import java.util.List;
 /**
- * Interface PizzaOrderRepo is name Repository to storage Entity "PizzaOrder".
+ * Interface PizzaOrderRepo is  Repository to storage Entity "PizzaOrder".
  * I can be used different  methods CRUD extends CrudRepository.
  */
 public interface PizzaOrderRepo extends CrudRepository<PizzaOrder, Long> {
 
-
+    /***
+     * Method List PizzaOrder find by NameCustomer into PizzaOrderRepo.
+     * @param nameCustomer
+     * @return List PizzaOrder.
+     */
     List<PizzaOrder> findByNameCustomer(String nameCustomer);
 
 

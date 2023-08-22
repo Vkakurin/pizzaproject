@@ -1,15 +1,13 @@
 <html>
+
+<body>
+<a href="/main">Go to Main page</a>
+<h4>ORDER</h4>
 <h6><div>Attention!</div></h6>
 {{#message}}
     {{message}}
 {{/message}}
-<body>
-<a href="/main">Go to Main page</a>
-<h4>ORDER</h4>
-
 <div>
-
-
     <form method="post"  >
         <input type="text" name="nameCustomer" placeholder="Enter nameCustomer">
         <input type="text" name="addressDelivery" placeholder="Enter address">
@@ -23,8 +21,6 @@
     <input type="text" name="filter" value="{{filter}}" placeholder="nameCustomer "/>
     <button type="submit">Find orders by nameCustomer</button>
 </form>
-
-
 
 <form method="get" action="/deleteOrder">
     <input type="text" name="order_id" placeholder="Enter  orderId " >
@@ -43,14 +39,7 @@
         <span>{{getPizzaName}}</span><  >
 
     </div>
-    {{#message}}
-        <span>{{message}}</span>
-    {{/message}}
-
 {{/pizzaOrders}}
-
-
-
 
 <form method="get" action="/deleteAllOrder">
 

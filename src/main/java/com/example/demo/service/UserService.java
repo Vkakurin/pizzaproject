@@ -16,7 +16,7 @@ import java.util.UUID;
 
 
 /**
- * Service CRUD Methods. I can use service for UserController via Repository.
+ * Service class of the CRUD Methods. I can use service for UserController via Repository.
  */
 
 @Service
@@ -26,24 +26,30 @@ public class UserService implements UserDetailsService {
     @Autowired
     private MailSender mailSender;
 
+
+    /***
+     * Overriding UserDetails interface  authorizes the user with username and password.
+     * @param username
+     * @return (UserDetails) username
+     * @throws UsernameNotFoundException when username not found.
+     */
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
         return (UserDetails) userRepo.findByUsername(username);
     }
 
-    public List<User> getAll() {
-        return userRepo.findAll();
-
-    }
+    /**
+     * Method get into the List all records of User  into UserRepo.
+     * @param
+     */
+    public List<User> getAll() {return userRepo.findAll();}
 
     /**
      * Method delete record User by "userId" from UserRepo.
      *
      * @param
      */
-    public void deleteById(Long id) {
-        userRepo.deleteById(id);
-    }
+    public void deleteById(Long id) { userRepo.deleteById(id);}
 
     public boolean isUserIdExist(String id) {
         return userRepo.existsById(Long.valueOf(id));
@@ -65,12 +71,12 @@ public class UserService implements UserDetailsService {
         user.setActive(true);
         user.setRoles(Collections.singleton(Role.USER));// назначаем роль
         user.setActivationCode(UUID.randomUUID().toString());
-
         userRepo.save(user);
+
         if (!StringUtils.isEmpty(user.getEmail())) {
             String message = String.format(
                     "Hello? %s! \n" +
-                            "Welcome to Pizza, please visit next link: http://localhost:8080/activate/%s",
+                            "Welcome to Pizza. Please visit next link: http://localhost:8080/activate/%s",
                     user.getUsername(),
                     user.getActivationCode()
             );

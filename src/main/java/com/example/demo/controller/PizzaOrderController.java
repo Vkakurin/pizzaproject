@@ -65,6 +65,7 @@ public class PizzaOrderController {
 
         if(! (!pizzaOrderService.isPizzaIdExistInOrders(id) && pizzaOrderService.isPizzaIdExistInPizza(id) ) ){
             model.addAttribute("message", "This PizzaId exist! Get another PizzaId");
+            System.out.println("****************This PizzaId exist! Get another PizzaId**********************");
             return "redirect:/pizzaOrder";
         } else {
             pizzaOrderService.save(nameCustomer, addressDelivery, phoneCustomer, pizza);
@@ -88,7 +89,7 @@ public class PizzaOrderController {
     }
 
 
-    @GetMapping("/getOrder{id}")
+    @GetMapping("/getOrder/{id}")
     public String getOrder(
             Model model,
             @PathVariable Long id

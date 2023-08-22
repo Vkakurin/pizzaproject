@@ -8,7 +8,6 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 
 @Controller
 public class RegistrationController {
@@ -32,16 +31,19 @@ public class RegistrationController {
     @GetMapping("/activate/{code}")
     public String activate(
             Model model,
-            @RequestParam(required = false, defaultValue = "") String code){
+            @PathVariable String code){
 
     boolean isActivated = userService.activateUser(code);
     if(isActivated){
         model.addAttribute("message", "User successfully activated!");
+        System.out.println(">>>>>>>>>>>>>>>>>>>>This PizzaId exist! Get another PizzaId>>>>>>>>>>>>>>>>");
+
     }else {
         model.addAttribute("massage", "ActivationCode is not found!");
+        System.out.println("::::::::::::::::::::This PizzaId exist! Get another PizzaId:::::::::::::::::::::");
     }
 
-       return  "registration";
+       return  "login";
     }
 
 

@@ -56,8 +56,9 @@ public class PizzaController {
             Model model) {
         if( !pizzaService.isCafeIdExistInCafe(cafeId))
         {
-            System.out.println("///////////////////////////////////");
+
             model.addAttribute("message", "This CafeId exist! Get another CafeId");
+            System.out.println("////////This CafeId exist! Get another CafeId////////////////");
             return "redirect:/pizza";
         } else {
             pizzaService.save(pizzaName, size, description, price, cafe);
