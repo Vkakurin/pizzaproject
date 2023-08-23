@@ -27,9 +27,11 @@ public class Pizza {
     private String pizzaName;
 
     @Length(max=45, message = "Size of pizza can't  too long")
+    @NotBlank(message = "Please fill the size")
     private String size;
 
-    @Length(max=2063, message = "Description of pizza can't  too long")
+    @Length(max=2048, message = "Description of pizza can't  too long")
+    @NotBlank(message = "Please fill the pizzaName. Maximum 2Kb")
     private String description;
 
     private Double price;

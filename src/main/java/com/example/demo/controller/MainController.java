@@ -22,6 +22,12 @@ public class MainController {
        public String main(){
         return "main";
     }
-
-
+    @GetMapping("/worker")
+    public String worker(){
+        return "worker";
+    }
+    @GetMapping("/customer")
+    public String customer(){
+        return "customer";
+    }
 }

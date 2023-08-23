@@ -2,6 +2,7 @@ package com.example.demo.config;
 
 import com.example.demo.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
@@ -26,19 +27,19 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter { // Под�
     @Autowired
     private UserService userService;
 
- //   @Autowired
-//    public PasswordEncoder getPasswordEncoder;
-//    @Bean
-//    public PasswordEncoder getPasswordEncoder(){
-//        return new BCryptPasswordEncoder(8);
-//    }
+    @Autowired
+    public PasswordEncoder passwordEncoder;
+    @Bean
+    public PasswordEncoder getPasswordEncoder(){
+        return new BCryptPasswordEncoder(8);
+    }
 
     //Override - переопределяем методы из WebSecurityConfigurerAdapter
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http
                 .authorizeRequests()
-                .antMatchers("/", "/registration","/activate/*").permitAll()    // Указываем кто может пользоваться нашей системой без авторизации и указываем общедоступные страницы
+                .antMatchers("/", "/registration","/activate/*","/worker","/customer").permitAll()    // Указываем кто может пользоваться нашей системой без авторизации и указываем общедоступные страницы
                 .anyRequest().authenticated()
                 .and()
                 .formLogin()
@@ -53,7 +54,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter { // Под�
     @Override
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
         auth.userDetailsService(userService)//обект за авторизацию пользователя
-                .passwordEncoder(NoOpPasswordEncoder.getInstance());
+                .passwordEncoder(passwordEncoder);
     }
 
 }

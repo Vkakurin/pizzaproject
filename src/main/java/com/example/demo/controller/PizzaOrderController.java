@@ -6,6 +6,7 @@ import com.example.demo.model.PizzaOrder;
 import com.example.demo.service.CafeService;
 import com.example.demo.service.PizzaOrderService;
 import com.example.demo.service.PizzaService;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -29,6 +30,7 @@ public class PizzaOrderController {
 
 
     @GetMapping("/pizzaOrder")
+
     public String getOrder(
             @RequestParam(required = false, defaultValue = "") String filter,
             Model model) {
@@ -79,6 +81,7 @@ public class PizzaOrderController {
     }
 
     @GetMapping("/deleteOrder{order_id}")
+    @PreAuthorize("hasAuthority('ADMIN')")
     public String deleteOrder(
             Model model,
             @RequestParam(required = false, defaultValue = "") String order_id) {
@@ -90,6 +93,7 @@ public class PizzaOrderController {
 
 
     @GetMapping("/getOrder/{id}")
+
     public String getOrder(
             Model model,
             @PathVariable Long id
@@ -99,6 +103,7 @@ public class PizzaOrderController {
         return "redirect:/pizzaOrder";
     }
     @GetMapping("/deleteAllOrder")
+    @PreAuthorize("hasAuthority('ADMIN')")
     public String deleteAllOrder(
             Model model
 

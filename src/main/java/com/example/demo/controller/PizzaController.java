@@ -4,6 +4,7 @@ import com.example.demo.model.Cafe;
 import com.example.demo.model.Pizza;
 import com.example.demo.service.CafeService;
 import com.example.demo.service.PizzaService;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -46,6 +47,7 @@ public class PizzaController {
 
 
     @PostMapping("/pizza")
+    @PreAuthorize(value = "hasAuthority('USER')")
     public String addPizza(
             @RequestParam String pizzaName,
             @RequestParam String size,
@@ -70,6 +72,7 @@ public class PizzaController {
     }
 
     @GetMapping("/deletePizza{id}")
+    @PreAuthorize("hasAuthority('ADMIN')")
     public String deletePizza(
             Model model,
             @RequestParam(required = false, defaultValue = "") String id) {

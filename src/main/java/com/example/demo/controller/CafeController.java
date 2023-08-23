@@ -2,6 +2,7 @@ package com.example.demo.controller;
 
 import com.example.demo.model.Cafe;
 import com.example.demo.service.CafeService;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -11,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 
 @Controller
+@PreAuthorize("hasAuthority('ADMIN')")
 public class CafeController {
 
     private final CafeService cafeService;
@@ -35,7 +37,7 @@ public class CafeController {
         model.addAttribute("filter",filter);
         return "cafe";
     }
-//todo сделать защиту от набора несуществующего номера кафе
+
     @PostMapping("/cafe")
     public String addCafe(
             @RequestParam String nameCafe,
