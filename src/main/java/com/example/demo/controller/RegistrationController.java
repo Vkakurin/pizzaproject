@@ -25,8 +25,8 @@ public class RegistrationController {
 
     @PostMapping("/registration")
     public String addUser( @Valid User user,
-                           BindingResult bindingResult,
-                          Model model) {
+                           BindingResult bindingResult,// для вывода ошибок при валидации на страничку регистрации
+                          Model model) {// в данном случае не доделал
 
         if(user.getPassword() != null && !user.getPassword().equals(user.getPassword2())){
             model.addAttribute("message", "*****Passwords are different!*****");

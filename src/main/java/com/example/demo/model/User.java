@@ -26,7 +26,7 @@ import java.util.Set;
 public class User implements UserDetails {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-//    @NotBlank(message = "OrderId cannot be empty")
+    @NotBlank(message = "OrderId cannot be empty")
     private Long user_id;
 
     @Length(max=255, message = "Username can't  too long")

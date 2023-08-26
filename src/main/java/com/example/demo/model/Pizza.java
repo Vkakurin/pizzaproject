@@ -19,7 +19,7 @@ public class Pizza {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
- //   @NotBlank(message = "PizzaId cannot be empty")
+    @NotBlank(message = "PizzaId cannot be empty")
     private Long id;
 
     @NotBlank(message = "Please fill the pizzaName")//or "pizzaName cannot be empty"

@@ -22,7 +22,7 @@ import javax.validation.constraints.NotBlank;
 public class Cafe {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
- //   @NotBlank(message = "cafeId cannot be empty")
+    @NotBlank(message = "cafeId cannot be empty")
     private Long cafeId;
 
     @NotBlank(message = "NameCafe cannot be empty")
