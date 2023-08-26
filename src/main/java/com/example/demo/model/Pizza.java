@@ -19,18 +19,18 @@ public class Pizza {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    @NotBlank(message = "PizzaId cannot be empty")
+ //   @NotBlank(message = "PizzaId cannot be empty")
     private Long id;
 
     @NotBlank(message = "Please fill the pizzaName")//or "pizzaName cannot be empty"
-    @Length(max=63, message = "PizzaName too long")
+    @Length(max=255, message = "PizzaName too long")
     private String pizzaName;
 
-    @Length(max=45, message = "Size of pizza can't  too long")
+    @Length(max=255, message = "Size of pizza can't  too long")
     @NotBlank(message = "Please fill the size")
     private String size;
 
-    @Length(max=2048, message = "Description of pizza can't  too long")
+    @Length(max=255, message = "Description of pizza can't  too long")
     @NotBlank(message = "Please fill the pizzaName. Maximum 2Kb")
     private String description;
 

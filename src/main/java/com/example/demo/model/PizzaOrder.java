@@ -20,7 +20,7 @@ import javax.validation.constraints.NotBlank;
 public class PizzaOrder {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    @NotBlank(message = "OrderId cannot be empty")
+//    @NotBlank(message = "OrderId cannot be empty")
     private Long order_id;
 
     @Length(max=255, message = "NameCustomer can't  too long")
@@ -29,7 +29,7 @@ public class PizzaOrder {
     @Length(max=255, message = "AddressDelivery can't  too long")
     private String addressDelivery;
 
-    @Length(max=63, message = "PhoneCustomer can't  too long")
+    @Length(max=255, message = "PhoneCustomer can't  too long")
     private String phoneCustomer;
     /**
      * Dependency between tables PizzaInCafe and PizzaOrder in the database:
