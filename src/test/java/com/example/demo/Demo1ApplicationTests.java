@@ -1,14 +1,22 @@
 package com.example.demo;
 
-import org.junit.jupiter.api.Assertions;
+import com.example.demo.repos.CafeRepo;
+import org.junit.Assert;
 import org.junit.jupiter.api.Test;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-
-import java.util.List;
 
 @SpringBootTest
 class Demo1ApplicationTests {
+
+
+	@Test
+	public void test() {
+		int x = 2;
+		int y = 5;
+		Assert.assertEquals(10, x * y);
+
+	}
+
 
 	@Test
 	void contextLoads() {
@@ -21,16 +29,21 @@ class Demo1ApplicationTests {
 	public void testAddingMessage() {
 
 	}
-//
-//		@Test
-//		public void testUsers() {
-//			@Autowired
-//			userRepo userRepos;
-//
-//			System.out.println("Тест");
-//			List list = userRepo.findAll();
-//
-//			Assertions.assertEquals(28, list.size());
-//
-//		}
+
+
+	@Test
+	public void testAllRepoBySize() {
+
+
 	}
+
+
+		@Test
+		void itShouldFindCafe() {
+
+			CafeRepo underTest;
+			System.out.println("???????????????????");
+
+		}
+	
+}
