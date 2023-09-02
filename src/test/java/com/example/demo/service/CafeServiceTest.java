@@ -25,7 +25,7 @@ class CafeServiceTest {
     private CafeService cafeService;
     @Autowired
     private CafeRepo cafeRepo;
-    static private Long cafeIdTest = 60l;//  !!! Перед вводом убедиться с какого Id база SQL будет
+    static private Long cafeIdTest = 106l;//  !!! Перед вводом убедиться с какого Id база SQL будет
     // сохранять новую Тестовую запись,чтобы при запуске CafeServiceTest сначала сохранить ее в методе save ,
     // а затем ее же удалить методом deleteCafeById.
     static private String nameCafe = "Cafe_1";

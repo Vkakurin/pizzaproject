@@ -18,10 +18,10 @@ class PizzaOrderServiceTest {
     private PizzaOrderService pizzaOrderService;
     @Autowired
     private PizzaOrderRepo pizzaOrderRepo;
-    private Long pizzaOrderIdTest = 85l;//  !!! Перед вводом убедиться с какого Id база SQL будет
+    private Long pizzaOrderIdTest = 105l;//  !!! Перед вводом убедиться с какого Id база SQL будет
     // сохранять новую Тестовую запись,чтобы при запуске PizzaOrderServiceTest сначала сохранить   ее в методе save ,
     // а затем ее же удалить методом deleteOrderById.
-    private Integer expectSizePizzas = 4;// Смотреть актуальное количество записей в БД перед запуском Общего теста !!!!!
+    private Integer expectSizePizzas = 7;// Смотреть актуальное количество записей в БД перед запуском Общего теста !!!!!
 
 
 

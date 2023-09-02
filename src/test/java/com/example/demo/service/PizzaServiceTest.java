@@ -24,12 +24,11 @@ class PizzaServiceTest {
     @Autowired
     private PizzaRepo pizzaRepo;
 
-    private  String pizzaName = "Margoritta";
-    private Long pizzaIdTest = 55l;//  !!! Перед вводом убедиться с какого Id база SQL будет
+    private  String pizzaName = "MargorittaTest";
+    private Long pizzaIdTest = 115l;//  !!! Перед вводом убедиться с какого Id база SQL будет
     // сохранять новую Тестовую запись,чтобы при запуске PizzaServiceTest сначала сохранить ее в методе save ,
     // а затем ее же удалить методом deletePizzaById.
-    private Integer expectSizePizzas = 6;// Смотреть актуальное количество записей в БД перед запуском Общего теста !!!!!
-
+    private Integer expectSizePizzas = 12;// Смотреть актуальное количество записей в БД перед запуском Общего теста !!!!!
 
 
 
@@ -55,7 +54,6 @@ class PizzaServiceTest {
         Cafe cafe = new Cafe(nameCafe, address, phone);
         cafe.setCafeId(2l);// cafeId должен быть только существующей Cafe в БД иначе возникает ошибка  SQL Error: 1452, SQLState: 23000
 
-        pizza.setId(1l);
         pizza.setPizzaName(pizzaName);
         pizza.setSize(size);
         pizza.setDescription(description);
@@ -84,6 +82,7 @@ class PizzaServiceTest {
 
     }
 
+
     @Test
     void isCafeIdExistInCafe() {
         Long cafeIdTest = 1l;// существующий  cafeId  в bd
@@ -91,4 +90,5 @@ class PizzaServiceTest {
         cafe.setCafeId(cafeIdTest);
         Assert.assertTrue(pizzaService.isCafeIdExistInCafe(cafeIdTest));
     }
+
 }

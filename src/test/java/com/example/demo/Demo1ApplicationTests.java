@@ -17,33 +17,5 @@ class Demo1ApplicationTests {
 
 	}
 
-
-	@Test
-	void contextLoads() {
-	}
-
-	/**
-	 * тест для сообщения в базу данных
-	 */
-	@Test
-	public void testAddingMessage() {
-
-	}
-
-
-	@Test
-	public void testAllRepoBySize() {
-
-
-	}
-
-
-		@Test
-		void itShouldFindCafe() {
-
-			CafeRepo underTest;
-			System.out.println("???????????????????");
-
-		}
 	
 }
