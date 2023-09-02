@@ -20,7 +20,7 @@ import javax.validation.constraints.NotBlank;
 public class PizzaOrder {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-   @NotBlank(message = "OrderId cannot be empty")
+//   @NotBlank(message = "OrderId cannot be empty")
     private Long order_id;
 
     @Length(max=255, message = "NameCustomer can't  too long")
@@ -36,7 +36,7 @@ public class PizzaOrder {
      * there can be many pizzas in one order
      */
     @ManyToOne(fetch = FetchType.EAGER)
-    @JoinColumn(name = "id")
+    @JoinColumn(name = "id",  nullable = false, referencedColumnName = "id")
     private Pizza pizza;
 
     /**

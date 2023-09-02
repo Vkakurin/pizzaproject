@@ -22,18 +22,18 @@ import javax.validation.constraints.NotBlank;
 public class Cafe {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    @NotBlank(message = "cafeId cannot be empty")
+//    @NotBlank(message = "cafeId cannot be empty")
     private Long cafeId;
 
-    @NotBlank(message = "NameCafe cannot be empty")
+//    @NotBlank(message = "NameCafe cannot be empty")
     @Length(max=255, message = "NameCafe too long")
     private String nameCafe;
 
-    @NotBlank(message = "Address cannot be empty")
+ //   @NotBlank(message = "Address cannot be empty")
     @Length(max=255, message = "Address too long")
     private String address;
 
-    @NotBlank(message = "Phone cannot be empty")
+//    @NotBlank(message = "Phone cannot be empty")
     @Length(max=255, message = "PhoneNumber too long")
     private String phone;
     /**

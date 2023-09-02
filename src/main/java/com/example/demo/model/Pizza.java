@@ -4,7 +4,6 @@ package com.example.demo.model;
 import lombok.*;
 import org.hibernate.validator.constraints.Length;
 import javax.persistence.*;
-import javax.validation.constraints.NotBlank;
 
 /**
  * the Pizza entity class with private fields in which
@@ -19,19 +18,19 @@ public class Pizza {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    @NotBlank(message = "PizzaId cannot be empty")
+//    @NotBlank(message = "PizzaId cannot be empty")
     private Long id;
 
-    @NotBlank(message = "Please fill the pizzaName")//or "pizzaName cannot be empty"
+//    @NotBlank(message = "Please fill the pizzaName")//or "pizzaName cannot be empty"
     @Length(max=255, message = "PizzaName too long")
     private String pizzaName;
 
     @Length(max=255, message = "Size of pizza can't  too long")
-    @NotBlank(message = "Please fill the size")
+//    @NotBlank(message = "Please fill the size")
     private String size;
 
     @Length(max=255, message = "Description of pizza can't  too long")
-    @NotBlank(message = "Please fill the pizzaName. Maximum 2Kb")
+//    @NotBlank(message = "Please fill the pizzaName. Maximum 2Kb")
     private String description;
 
     private Double price;
@@ -40,7 +39,7 @@ public class Pizza {
      * there can be many pizzas in one cafe
      */
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "cafeId")
+    @JoinColumn(name = "cafeId",nullable = false, referencedColumnName = "cafeId")
     private Cafe cafe;
 
     /**
