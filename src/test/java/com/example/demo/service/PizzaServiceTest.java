@@ -3,18 +3,12 @@ package com.example.demo.service;
 import com.example.demo.model.Cafe;
 import com.example.demo.model.Pizza;
 import com.example.demo.repos.PizzaRepo;
-import lombok.var;
 import org.junit.Assert;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
-import java.util.Collections;
-import java.util.List;
 import java.util.Optional;
-import java.util.stream.Collectors;
-
-import static org.junit.jupiter.api.Assertions.*;
 
 @SpringBootTest
 class PizzaServiceTest {
@@ -28,7 +22,7 @@ class PizzaServiceTest {
     private Long pizzaIdTest = 115l;//  !!! Перед вводом убедиться с какого Id база SQL будет
     // сохранять новую Тестовую запись,чтобы при запуске PizzaServiceTest сначала сохранить ее в методе save ,
     // а затем ее же удалить методом deletePizzaById.
-    private Integer expectSizePizzas = 12;// Смотреть актуальное количество записей в БД перед запуском Общего теста !!!!!
+    private Integer expectSizePizzas = 13;// Смотреть актуальное количество записей в БД перед запуском Общего теста !!!!!
 
 
 
@@ -90,5 +84,7 @@ class PizzaServiceTest {
         cafe.setCafeId(cafeIdTest);
         Assert.assertTrue(pizzaService.isCafeIdExistInCafe(cafeIdTest));
     }
+
+
 
 }
